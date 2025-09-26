@@ -183,6 +183,6 @@
 
 -----
 
-**120- Mejora el ejercicio anterior para que se pueda convertir a binario, octal o hexadecimal**
+**20- Mejora el ejercicio anterior para que se pueda convertir a binario, octal o hexadecimal**
 
 [Ir a `Ejercicio20.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio20.php)
