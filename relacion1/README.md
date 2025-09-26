@@ -22,7 +22,7 @@
   - Investiga en la siguiente dirección como mostrar la **fecha y la hora del sistema** en el momento de la ejecución:
     [https://www.php.net/manual/es/function.date.php](https://www.php.net/manual/es/function.date.php).
 
-[Ir a `Ejercicio01.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio01.php)
+[Ir a `Ejercicio01.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio01.php)
 
 -----
 
@@ -33,7 +33,7 @@
   - `float`
   - `string`
 
-[Ir a `Ejercicio02.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio02.php)
+[Ir a `Ejercicio02.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio02.php)
 
 -----
 
@@ -53,7 +53,7 @@
 
 **Prueba un volcado con **`var_dump($_SERVER)`** y también con **`print_r($_SERVER)`**. ¿Cuál es la diferencia?**
 
-[Ir a `Ejercicio03.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio03.php)
+[Ir a `Ejercicio03.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio03.php)
 
 -----
 
@@ -63,7 +63,7 @@
   - ***todos los días*** **secuencialmente**
   - **lo mismo que el anterior, pero en formato de** ***lista numerada***
 
-[Ir a `Ejercicio04.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio04.php)
+[Ir a `Ejercicio04.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio04.php)
 
 -----
 
@@ -73,40 +73,40 @@
   - **la ***temperatura de todos los días***, secuencialmente**
   - **lo mismo que el anterior, pero en formato de** ***lista numerada***
 
-[Ir a `Ejercicio05.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio05.php)
+[Ir a `Ejercicio05.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio05.php)
 
 -----
 
  **6- Declara en un programa PHP una **clase `fruta`**, con dos atributos: `nombre` y `color`, y dos funciones, `set_name()` y `get_name()`. Declara e inicializa dos instancias: `apple` y `banana`, inicializa los nombres y muéstralos por pantalla.**
 
-[Ir a `Ejercicio06.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio06.php)
+[Ir a `Ejercicio06.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio06.php)
 
 -----
 
 **7- Calcula la **nota final** de una persona a partir de la **media de dos notas** numéricas iniciales, y **descontando 0.25 por cada falta sin justificar**. Muestra el resultado por pantalla, indicando si la persona **aprueba o suspende**.**
 
 
-[Ir a `Ejercicio07.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio07.php)
+[Ir a `Ejercicio07.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio07.php)
 
 -----
 
 **8- Crea en un script PHP dos **arrays asociativos paralelos**, uno con la **rúbrica de 4 calificaciones** (inicial, primera, segunda y tercera) y otro con las **notas particulares de una persona**. A continuación, computará la **nota final** de esa persona, y muéstrala por pantalla.**
 
 
-[Ir a `Ejercicio08.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio08.php)
+[Ir a `Ejercicio08.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio08.php)
 
 -----
 
  **9- En un programa PHP, valora a partir de los **3 lados de un triángulo** si es **equilátero, isósceles o escaleno**, y muestra esa valoración por pantalla.**
 
-[Ir a `Ejercicio09.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio09.php)
+[Ir a `Ejercicio09.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio09.php)
 
 -----
 
 
 **10- Haz un programa PHP que resuelva una **ecuación de segundo grado** siempre que los resultados sean **reales**.**
 
-[Ir a `Ejercicio10.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio10.php)
+[Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio10.php)
 
 -----
 
@@ -120,7 +120,7 @@
 
 **Aparte de esta casuística, hay que evitar dividir por cero…. Resuelve toda estas posibilidades y refactoriza el código para que sea limpio y óptimo.**
 
-[Ir a `Ejercicio11.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio11.php)
+[Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio11.php)
 
 -----
 
@@ -132,19 +132,19 @@
 - **Suficiente si es un 5.**
 - **Suspenso, si es 1,2,3 ó 4.**
 
-[Ir a `Ejercicio12.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio12.php)
+[Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio12.php)
 
 -----
 
 **13- Haz un script PHP que calcule el **factorial** de un número natural.**
 
-[Ir a `Ejercicio13.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio13.php)
+[Ir a `Ejercicio13.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio13.php)
 
 -----
 
 **14- Haz un programa PHP que calcule la ***suma de los n primeros números naturales***.**
 
-[Ir a `Ejercicio14.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio14.php)
+[Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio15.php)
 
 -----
 
@@ -160,29 +160,29 @@
 **<span style="color: red;">1</span> <span style="color: red;">2</span> 3 4 <span style="color: red;">5</span> 6 7 8 9 <span style="color: red;">10</span>**
 
 
-[Ir a `Ejercicio16.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio16.php)
+[Ir a `Ejercicio16.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio16.php)
 
 -----
 
 **17- Haz un script en PHP que calcule la ***división de dos números naturales*** utilizando el ***algoritmo de Euclides para la división***.**
 
-[Ir a `Ejercicio17.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio17.php)
+[Ir a `Ejercicio17.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio17.php)
 
 -----
 
  **18- Haz un programa en PHP que calcule el ***máximo común divisor*** de dos números naturales utilizando el ***algoritmo de Euclides***.**
 
 
-[Ir a `Ejercicio18.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio18.php)
+[Ir a `Ejercicio18.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio18.php)
 
 -----
 
 **19- Haz un script PHP en el que conviertas en ***binario*** un número natural.**
 
-[Ir a `Ejercicio19.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio19.php)
+[Ir a `Ejercicio19.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio19.php)
 
 -----
 
 **120- Mejora el ejercicio anterior para que se pueda convertir a binario, octal o hexadecimal**
 
-[Ir a `Ejercicio20.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio20.php)
+[Ir a `Ejercicio20.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio20.php)
