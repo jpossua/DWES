@@ -12,6 +12,7 @@
     <h1>Ejercicio 19</h1>
 
     <?php
+    /*
     $numeroDecimal = 6;
     $numeroBinario = decbin($numeroDecimal);
 
@@ -21,6 +22,20 @@
         echo ("El número {$numeroDecimal} su representación decimal es: " . $numeroDecimal . "<br>");
         echo ("El número {$numeroDecimal} su representación binaria es: " . $numeroBinario . "<br>");
     }
+    */
+
+    $numero = 2;
+    $resultado = "";
+
+    echo ("El resultado es: ");
+    while ($numero >= 2) {
+        $resultado = (string) $numero % 2 . $resultado; // casting explicito de un numero entero en un dato tipo string
+
+        $cociente = intval($numero / 2);
+        $numero = $cociente;
+    }
+
+    echo ((string) $numero . $resultado);
     ?>
 
 </body>
