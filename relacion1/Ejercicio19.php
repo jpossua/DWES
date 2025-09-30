@@ -15,7 +15,12 @@
     $numeroDecimal = 6;
     $numeroBinario = decbin($numeroDecimal);
 
-    echo ("El número decimal {$numeroDecimal} su representación binaria es: " . $numeroBinario);
+    if ($numeroDecimal < 0) {
+        echo ("Error: El número decimal debe ser positivo.");
+    } else {
+        echo ("El número {$numeroDecimal} su representación decimal es: " . $numeroDecimal . "<br>");
+        echo ("El número {$numeroDecimal} su representación binaria es: " . $numeroBinario . "<br>");
+    }
     ?>
 
 </body>

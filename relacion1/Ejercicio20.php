@@ -11,15 +11,20 @@
 <body>
     <h1>Ejercicio 20</h1>
     <?php
-    $numeroDecimal = 100;
+    $numeroDecimal = 255;
     $numeroBinario = decbin($numeroDecimal);
     $numeroOctal = decoct($numeroDecimal);
-    $numeroHexa = hexdec($numeroDecimal);
+    $numeroHexa = strtoupper(dechex($numeroDecimal));
 
-    echo ("El número {$numeroDecimal} su representación decimal es: " . $numeroDecimal . "<br>");
-    echo ("El número {$numeroDecimal} su representación binaria es: " . $numeroBinario . "<br>");
-    echo ("El número {$numeroDecimal} su representación octal es: " . $numeroOctal . "<br>");
-    echo ("El número {$numeroDecimal} su representación hexadecimal es: " . $numeroHexa . "<br>");
+    if ($numeroDecimal < 0) {
+        echo ("Error: El número decimal debe ser positivo.");
+    } else {
+        echo ("El número {$numeroDecimal} su representación decimal es: " . $numeroDecimal . "<br>");
+        echo ("El número {$numeroDecimal} su representación binaria es: " . $numeroBinario . "<br>");
+        echo ("El número {$numeroDecimal} su representación octal es: " . $numeroOctal . "<br>");
+        echo ("El número {$numeroDecimal} su representación hexadecimal es: " . $numeroHexa . "<br>");
+    }
+
     ?>
 </body>
 
