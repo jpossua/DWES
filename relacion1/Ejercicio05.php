@@ -41,7 +41,7 @@
     echo ("</ol>");
 
     echo ("<table border='1'>");
-    echo ("<th align='center'>Temperaturas</th>");
+    echo ("<th  colspan='2' align='center'>Temperaturas</th>");
     foreach (TEMPERATURAS as $dia => $temp) {
         echo ("<tr>");
         echo ("<td><b>$dia</b></td>");

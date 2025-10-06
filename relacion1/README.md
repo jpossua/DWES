@@ -144,13 +144,13 @@
 
 **14- Haz un programa PHP que calcule la ***suma de los n primeros números naturales***.**
 
-[Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio15.php)
+[Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio14.php)
 
 -----
 
 **15- Haz un programa php que te diga si un número entero y positivo es primo o no**
 
-[Ir a `Ejercicio15.php`](https://github.com/jpossua/relacion1/blob/main/Ejercicio15.php)
+[Ir a `Ejercicio15.php`](https://github.com/jpossua/DWES/blob/main/relacion1/Ejercicio15.php)
 
 -----
 
