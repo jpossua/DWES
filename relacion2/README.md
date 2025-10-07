@@ -28,6 +28,8 @@
 
 **3-  Vamos a realizar lo propio con esta relación, y un super-index para todas las relaciones que vamos a realizar. El “super-index” tendrá una barra de navegación, una card por cada relación y un footer. Formatea con Bootstrap a tu gusto, experimentando diversas posibilidades hasta dar con tu preferida.**
 
+[Ir a `Ejercicio03`](https://github.com/jpossua/DWES/blob/main/index.html)
+
 -----
 
 **4- Retoma el ejercicio 4 de la relación anterior y aplícale estilos con clases de Bootstrap 5 (experimentaremos así las listas numeradas)**
