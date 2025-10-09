@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 1 - Ejercicio 05</title>
+    <title>Relacion 2 - Ejercicio 05</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -12,7 +12,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body style="background-color: #6699CC;">
+<body class="bg-info vh-100">
     <div class="card-header text-center">
         <h1 class="mb-0 text-light fw-bold p-3">Ejercicio 05</h1>
     </div>
@@ -32,7 +32,7 @@
     // El modo original de constantes: define("NOMBRE", "Jose");
 
     // 1. Muestra la temperatura del primer día de la semana.
-    echo ("<div class='container text-center border border-primary-subtle bg-info md-3 p-3'>");
+    echo ("<div class='container text-center border border-primary-subtle bg-info-subtle md-3 p-3'>");
     echo ("<div class='container bg-white md-3 p-3'>");
 
     echo ("La temperatura del Lunes es: ") . TEMPERATURAS['Lunes'] . "ºC<br><br>";
@@ -44,7 +44,7 @@
     echo ("</div>");
 
     // 3. Muestra la temperatura de todos los días en una lista numerada
-    echo (" <div class='container text-center p-5 md-5 border border-primary-subtle bg-info'");
+    echo (" <div class='container text-center p-5 md-5 border border-primary-subtle bg-info-subtle'");
     echo (" <div class='row justify-content-md-center'>");
     echo ("<div class='col-auto'>");
     echo ("<ol class='list-group list-group-numbered'>");
@@ -56,7 +56,7 @@
     echo ("</div>");
     echo ("</div>");
 
-    echo ("<div class='table-responsive'>");
+    echo ("<div class='table-responsive p-3'>");
     echo ("<table class='table table-bordered border-primary-subtle text-center'>");
     echo ("<th colspan='2'>Temperaturas</th>");
     foreach (TEMPERATURAS as $dia => $temp) {
