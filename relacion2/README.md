@@ -78,13 +78,13 @@
 
 **Validaremos los datos solo con controles html en el formulario.**
 
-[Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.php)
+[Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.html)
 
 -----
 
 **11- Re-formatea con Bootstrap el ejercicio 7 de la relación anterior y experimenta validaciones de los datos de entrada con html.**
 
-[Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.php)
+[Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.html)
 
 -----
 
@@ -92,7 +92,7 @@
 
 **Formatea con Bootstrap y valida los datos de entrada con html. Prueba con datos de entrada erróneos.¿crees que es suficiente con este control?**
 
-[Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.php)
+[Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.html)
 
 -----
 

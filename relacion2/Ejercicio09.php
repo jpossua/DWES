@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 2 - Ejercicio 08</title>
+    <title>Relacion 2 - Ejercicio 09</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -14,7 +14,7 @@
 
 <body class="bg-info vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 08</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 09</u></h1>
     </header>
     <main class="container mt-5">
         <section class="row justify-content-center">
@@ -49,6 +49,45 @@
         <section class='row justify-content-center mt-4'>
             <div class='col-md-6'>
                 <div class='alert alert-info text-center' role='alert'>
+                    <?php
+                    // Haremos que se ejecuten los calculos tras el envio
+                    if (!empty($_GET)) {
+                        // Descargo tres variables locales
+                        $num01 = $_GET['numero01'];
+                        $num02 = $_GET['numero02'];
+                        $operador = $_GET['operador'];
+                        $resultado = NULL;
+
+                        /*
+                    switch ($operador) {
+                        case "+":
+                            $resultado = $num01 + $num02;
+                            break;
+                        case "-":
+                            $resultado = $num01 - $num02;
+                            break;
+                        case "*":
+                            $resultado = $num01 * $num02;
+                            break;
+                        case "/":
+                            $resultado = $num01 / $num02;
+                            break;
+                        case "%":
+                            $resultado = $num01 % $num02;
+                            break;
+                    }
+                    */
+
+                        $resultado = match ($operador) {
+                            "+" => $num01 + $num02,
+                            "-" => $num01 - $num02,
+                            "*" => $num01 * $num02,
+                            "/" => $num01 / $num02,
+                            "%" => $num01 % $num02,
+                        };
+                        echo ("El resultado es: " . $resultado);
+                    }
+                    ?>
                 </div>
             </div>
         </section>

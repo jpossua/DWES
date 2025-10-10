@@ -21,7 +21,7 @@
 
     echo ("Tu nota final es: " . ($faltas > 0 ? $notaFinal = $notaFinal - ($descontar * $faltas) : $notaFinal) . "<br>");
 
-    if ($notaFinal > 4) {
+    if ($notaFinal >= 5) {
         echo ("¡Enhorabuena has aprobado!");
     } else {
         echo ("¡Lo siento, has suspendido...!");
