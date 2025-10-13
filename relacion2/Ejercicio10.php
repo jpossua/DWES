@@ -12,7 +12,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body class="bg-info vh-100">
+<body class="bg-primary bg-gradient vh-100">
     <header class="card-header text-center">
         <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 10</u></h1>
     </header>

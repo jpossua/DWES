@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 2 - Ejercicio 11</title>
+    <title>Relacion 2 - Ejercicio 13</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -14,25 +14,33 @@
 
 <body class="bg-primary bg-gradient vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 11</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 13</u></h1>
     </header>
 
     <main class="container mt-5">
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-body">
-                    <form action="Ejercicio11.php" method="get">
+                    <form action="Ejercicio13.php" method="get" onsubmit="return validarFormularioNotas()">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Introduce tu nombre:</label>
+                            <input class="form-control test-danger" type="text" name="nombre" id="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Introduce tu e-mail:</label>
+                            <input class="form-control test-danger" type="email" name="email" id="email">
+                        </div>
                         <div class="mb-3">
                             <label for="nota01" class="form-label">Introduce tu primera nota:</label>
-                            <input class="form-control" type="number" name="nota01" id="nota01" step="any" required min="0" max="10">
+                            <input class="form-control test-danger" type="number" name="nota01" id="nota01">
                         </div>
                         <div class="mb-3">
                             <label for="nota02" class="form-label">Introduce tu segunda nota:</label>
-                            <input class="form-control" type="number" name="nota02" id="nota02" step="any" required min="0" max="10">
+                            <input class="form-control test-danger" type="number" name="nota02" id="nota02">
                         </div>
                         <div class="mb-3">
                             <label for="faltas" class="form-label">Introduce tu número de faltas:</label>
-                            <input class="form-control" type="number" name="faltas" id="faltas" required min="0">
+                            <input class="form-control test-danger" type="number" name="faltas" id="faltas">
                         </div>
                         <div class="d-grid">
                             <input type="submit" class="btn btn-success" value="Enviar">
@@ -48,6 +56,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="./Ejercicio13.js"></script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 2 - Ejercicio 11</title>
+    <title>Relacion 2 - Ejercicio 14</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -14,28 +14,22 @@
 
 <body class="bg-primary bg-gradient vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 11</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 14</u></h1>
     </header>
 
     <main class="container mt-5">
         <section class="row justify-content-center">
             <article class="col-md-6">
-                <div class="card-body">
-                    <form action="Ejercicio11.php" method="get">
+                <div class="card-p-4 shadow  bg-info-subtle">
+                    <form action="Ejercicio14.php" method="get">
                         <div class="mb-3">
-                            <label for="nota01" class="form-label">Introduce tu primera nota:</label>
-                            <input class="form-control" type="number" name="nota01" id="nota01" step="any" required min="0" max="10">
-                        </div>
-                        <div class="mb-3">
-                            <label for="nota02" class="form-label">Introduce tu segunda nota:</label>
-                            <input class="form-control" type="number" name="nota02" id="nota02" step="any" required min="0" max="10">
-                        </div>
-                        <div class="mb-3">
-                            <label for="faltas" class="form-label">Introduce tu número de faltas:</label>
-                            <input class="form-control" type="number" name="faltas" id="faltas" required min="0">
+                            <label for="nota" class="form-label">Introduce tu nota (0-10):</label>
+                            <input type="number" class="form-control" id="nota" name="nota"
+                                placeholder="Puede ser un número decimal(ej: 7.5)" min="0" max="10" step="0.1"
+                                title="Introduce un número válido del 0 al 10 (puede tener decimales)." required>
                         </div>
                         <div class="d-grid">
-                            <input type="submit" class="btn btn-success" value="Enviar">
+                            <input type="submit" class="btn btn-success" value="Mostrar calificación">
                         </div>
                 </div>
             </article>

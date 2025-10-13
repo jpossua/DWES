@@ -78,13 +78,13 @@
 
 **Validaremos los datos solo con controles html en el formulario.**
 
-[Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.html)
+[Ir a `Ejercicio10.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.html)
 
 -----
 
 **11- Re-formatea con Bootstrap el ejercicio 7 de la relación anterior y experimenta validaciones de los datos de entrada con html.**
 
-[Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.html)
+[Ir a `Ejercicio11.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.html)
 
 -----
 
@@ -92,19 +92,29 @@
 
 **Formatea con Bootstrap y valida los datos de entrada con html. Prueba con datos de entrada erróneos.¿crees que es suficiente con este control?**
 
-[Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.html)
+*No, la validación únicamente con HTML5 no es suficiente.*
+
+*Aunque los atributos como `required`, `type="email"`, `min`, `max`, `step` y `pattern` (en campos de texto) mejoran la experiencia del usuario y evitan errores comunes, esta validación se realiza solo en el navegador y puede ser fácilmente omitida. Por ejemplo:*
+
+- *Un usuario puede desactivar JavaScript (aunque la validación HTML5 no depende de JS, sí se puede saltar modificando el DOM o usando herramientas como Postman).*
+- *Los navegadores ignoran el atributo pattern en `<input type="email">`, por lo que no se aplica una expresión regular personalizada.*
+- *No se valida la lógica del negocio (por ejemplo, que la nota final no sea negativa o que el correo pertenezca a un dominio permitido).*
+
+*Por seguridad y robustez, siempre debe complementarse con validación en el lado del servidor (por ejemplo, en PHP), que nunca puede ser evitada por el cliente.*
+
+[Ir a `Ejercicio12.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.html)
 
 -----
 
 **13- - Vuelve a versionar el ejercicio 9 de la relación anterior, pero en este caso, valida utilizando técnicas de Vanilla JavaScript.**
 
-[Ir a `Ejercicio13.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.php)
+[Ir a `Ejercicio13.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.html)
 
 -----
 
 **14- Haremos lo mismo que en el caso anterior pero con el ejercicio 12 de la relación 1, y acompañaremos la salida numérica con una salida gráfica utilizando una progress bar**
 
-[Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.php)
+[Ir a `Ejercicio14.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.html)
 
 -----
 

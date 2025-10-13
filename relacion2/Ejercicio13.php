@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 2 - Ejercicio 12</title>
+    <title>Relacion 2 - Ejercicio 13</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -14,7 +14,7 @@
 
 <body class="bg-primary bg-gradient vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 12</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 13</u></h1>
     </header>
     <section class='row justify-content-center mt-4'>
         <div class='col-md-6'>

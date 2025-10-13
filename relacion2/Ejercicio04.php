@@ -11,7 +11,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body style="background-color: #6699CC;">
+<body class="bg-primary bg-gradient vh-100">
     <div class="card-header text-center">
         <h1 class="mb-0 text-light fw-bold">Ejercicio 04</h1>
     </div>
