@@ -31,7 +31,7 @@
                     $descontar = 0.25;
                     $notaFinal = NULL;
 
-                    if ($nota1 < 0 || $nota1 > 10 || $nota2 < 0 || $nota2 > 10 || $faltas <= 0) {
+                    if ($nota1 < 0 || $nota1 > 10 || $nota2 < 0 || $nota2 > 10 || $faltas < 0) {
                         echo "Error: Las notas deben estar entre 0 y 10, y las faltas no pueden ser negativas.";
                     } else {
                         $notaFinal = (($nota1 + $nota2) / 2);
