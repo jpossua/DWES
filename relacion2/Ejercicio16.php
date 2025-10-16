@@ -101,10 +101,10 @@
 
     <script>
         function validarFormulario() {
-            const NUMERO = parseInt(document.getElementById("numero").value);
+            const numero = parseInt(document.getElementById("numero").value);
             let validar = true;
 
-            if (isNaN(NUMERO) || NUMERO == "" || NUMERO < 0) {
+            if (isNaN(numero) || numero == "" || numero < 0) {
                 alert("El valor debe ser un número entero mayor que 0.");
                 validar = false;
             }

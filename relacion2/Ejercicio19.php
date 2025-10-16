@@ -115,13 +115,13 @@
             const VALOR = parseInt(document.getElementById("numero").value.trim());
             let validar = true;
 
-            if (isNaN(VALOR)) {
+            if (isNaN(valor)) {
                 alert("Debes introducir un número entero válido.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;
             }
 
-            if (VALOR < 0) {
+            if (valor < 0) {
                 alert("El número debe ser mayor o igual que 0.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;

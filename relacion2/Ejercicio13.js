@@ -28,7 +28,7 @@ document.getElementById('faltas').addEventListener("change", function () {
 });
 
 function validarFormularioNotas() {
-    const EMAILREGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let nombre = document.getElementById("nombre").value.trim();
     let email = document.getElementById("email").value.trim();
     let nota01 = parseFloat(document.getElementById("nota01").value);
@@ -62,7 +62,7 @@ function validarFormularioNotas() {
     }
 
     // Validar email
-    if (email == "" || !EMAILREGEX.test(email)) {
+    if (email == "" || !emailRegex.test(email)) {
         campoErrorColorear("emailHelp", "email");
         alert("Por favor, introduce un correo electrónico válido.");
         correcto = false;

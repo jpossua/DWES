@@ -111,16 +111,16 @@
 
         function validarFormulario() {
             // Validar número
-            const VALOR_NUM = parseInt(document.getElementById("numero").value.trim());
+            const valorNum = parseInt(document.getElementById("numero").value.trim());
             let validar = true;
 
-            if (isNaN(VALOR_NUM)) {
+            if (isNaN(valorNum)) {
                 alert("Debes introducir un número entero válido.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;
             }
 
-            if (VALOR_NUM < 0) {
+            if (valorNum < 0) {
                 alert("El número debe ser mayor o igual que 0.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;

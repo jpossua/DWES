@@ -123,26 +123,26 @@
         });
 
         function validarFormulario() {
-            const DIVIDENDO = parseInt(document.getElementById("dividendo").value);
-            const DIVISOR = parseInt(document.getElementById("divisor").value);
-            const COCIENTE_CHECK = document.getElementById("opcion_cociente").checked;
-            const RESTO_CHECK = document.getElementById("opcion_resto").checked;
+            const dividendo = parseInt(document.getElementById("dividendo").value);
+            const divisor = parseInt(document.getElementById("divisor").value);
+            const cocienteCheck = document.getElementById("opcion_cociente").checked;
+            const restoCheck = document.getElementById("opcion_resto").checked;
             let validar = true;
 
-            if (isNaN(DIVIDENDO) || isNaN(DIVISOR)) {
+            if (isNaN(dividendo) || isNaN(divisor)) {
                 alert("Ambos campos deben ser números enteros.");
                 campoErrorColorear("divisorHelp", "divisor");
                 campoErrorColorear("dividendoHelp", "dividendo");
                 validar = false;
             }
 
-            if (DIVISOR === 0) {
+            if (divisor === 0) {
                 alert("El divisor no puede ser 0.");
                 campoErrorColorear("divisorHelp", "divisor");
                 validar = false;
             }
 
-            if (!COCIENTE_CHECK && !RESTO_CHECK) {
+            if (!cocienteCheck && !restoCheck) {
                 alert("Selecciona al menos una opción: cociente o resto.");
                 campoErrorColorear("checkHelp", "opcion_cociente");
                 campoErrorColorear("checkHelp", "opcion_resto");

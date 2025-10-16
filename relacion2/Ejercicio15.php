@@ -54,19 +54,19 @@
         }
         echo ("<div class='alert alert-success mt-4 text-center'>");
         echo ("<h4>Resultado:</h4>");
-        
+
         // Formatea un número con miles agrupados [number_format(number,decimals,decimalpoint,separator)].
-        echo ("<p><strong>{$numero}! = " . number_format($factorial, 0, ',', '.') . "</strong></p>"); 
+        echo ("<p><strong>{$numero}! = " . number_format($factorial, 0, ',', '.') . "</strong></p>");
         echo ("</div>");
     }
     ?>
 
     <script>
         function validarFormulario() {
-            const VALOR = parseFloat(document.getElementById("numero").value);
+            const valor = parseFloat(document.getElementById("numero").value);
             let validar = true;
 
-            if (isNaN(VALOR) || VALOR == "" || VALOR < 0) {
+            if (isNaN(valor) || valor == "" || valor < 0) {
                 alert("El valor debe ser un número entero mayor que 0.");
                 validar = false;
             }
