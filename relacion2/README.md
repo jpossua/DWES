@@ -79,12 +79,14 @@
 **Validaremos los datos solo con controles html en el formulario.**
 
 [Ir a `Ejercicio10.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.html)
+[Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.php)
 
 -----
 
 **11- Re-formatea con Bootstrap el ejercicio 7 de la relación anterior y experimenta validaciones de los datos de entrada con html.**
 
 [Ir a `Ejercicio11.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.html)
+[Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.php)
 
 -----
 
@@ -103,22 +105,40 @@
 *Por seguridad y robustez, siempre debe complementarse con validación en el lado del servidor (por ejemplo, en PHP), que nunca puede ser evitada por el cliente.*
 
 [Ir a `Ejercicio12.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.html)
+[Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.php)
 
 -----
 
 **13- - Vuelve a versionar el ejercicio 9 de la relación anterior, pero en este caso, valida utilizando técnicas de Vanilla JavaScript.**
 
 [Ir a `Ejercicio13.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.html)
+[Ir a `Ejercicio13.js`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.js)
+[Ir a `Ejercicio13.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.php)
 
 -----
 
 **14- Haremos lo mismo que en el caso anterior pero con el ejercicio 12 de la relación 1, y acompañaremos la salida numérica con una salida gráfica utilizando una progress bar**
 
 [Ir a `Ejercicio14.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.html)
+[Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.php)
 
 -----
 
 **15- Retomamos el ejercicio 13 de la relación anterior, formateamos la entrada con Bootstrap, la validamos con JavaScript, pero utilizaremos un mismo documento para el formulario, el cálculo y la visualización de resultados (juntaremos, por tanto, funcionalidades propias del front y del back). ¿Te parece recomendable hacerlo así?**
+
+*No, no es recomendable hacerlo así en aplicaciones reales o medianamente complejas, aunque sí puede ser aceptable en contextos educativos o ejercicios simples.*
+
+***<u>Ventajas</u>***
+- ***Sencillez***: *todo en un solo archivo, fácil de entender para principiantes.*
+- ***Rapidez***: *ideal para prototipos, ejercicios académicos o scripts pequeños.*
+- ***Sin redirecciones***: *el usuario ve el formulario y el resultado en la misma página.*
+
+***<u>Desventajas</u>***
+- ***Mezcla de responsabilidades***: *El mismo archivo maneja presentación (HTML/CSS), lógica de cliente (JavaScript) y lógica de servidor (PHP). Esto viola principios como la separación de concernimientos.*
+- ***Dificultad de mantenimiento***: *Si el proyecto crece, el archivo se vuelve largo, confuso y difícil de depurar o modificar.*
+- ***Problemas de seguridad***: *Es más fácil cometer errores (como inyecciones XSS) si no separamos claramente la entrada, el procesamiento y la salida.*
+- ***Reutilización limitada***: *No puedes reutilizar la lógica de cálculo en otra parte (por ejemplo, en una API) sin duplicar código.*
+- ***Experiencia de usuario pobre***: *Cada cálculo requiere recargar la página completa, mientras que con una arquitectura moderna (frontend + backend separados) podrías usar AJAX y evitar recargas.*
 
 [Ir a `Ejercicio15.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio15.php)
 
@@ -144,6 +164,12 @@
 -----
 
 **19- Igual con el 20, pero como el programa podrá convertir a binario, octal o hexadecimal, se incluirá en el formulario un campo select. Utiliza match en lugar de switch para la bifurcación múltiple. ¿puedes observar alguna ventaja del uso de match?**
+
+*Sí varias:*
+1. *Más conciso y legible: no necesitas `break`.*
+2. *Devuelve un valor: se puede asignar directamente a una variable.* 
+3. *Menos propenso a errores: evita caídas accidentales (`fall-through`).*
+4. *Moderno y funcional: se integra mejor con expresiones.*
 
 [Ir a `Ejercicio19.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio19.php)
 

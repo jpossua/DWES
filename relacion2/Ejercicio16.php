@@ -26,7 +26,7 @@
                     <form action="<?php echo ($_SERVER['PHP_SELF']) ?>" method="get" onsubmit="return validarFormulario()">
                         <div class="mb-3">
                             <label for="numero" class="form-label">Introduce un número mayor que 0:</label>
-                            <input type="numero" class="form-control" id="numero" name="numero" min="1" required>
+                            <input type="number" class="form-control" id="numero" name="numero" min="1" required>
                             <div class="invalid-feedback">
                                 Introduce un número entero válido.
                             </div>
@@ -52,7 +52,7 @@
     </main>
 
     <?php
-    if (isset($_GET['numero']) && isset($_GET['opcion'])) {
+    if (isset($_GET['numero']) && isset($_GET['opcion']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $numero = intval($_GET['numero']);
         $opcion = $_GET['opcion'];
         if ($numero <= 0) {
