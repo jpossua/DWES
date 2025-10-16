@@ -79,6 +79,7 @@
 **Validaremos los datos solo con controles html en el formulario.**
 
 [Ir a `Ejercicio10.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.html)
+
 [Ir a `Ejercicio10.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio10.php)
 
 -----
@@ -86,6 +87,7 @@
 **11- Re-formatea con Bootstrap el ejercicio 7 de la relación anterior y experimenta validaciones de los datos de entrada con html.**
 
 [Ir a `Ejercicio11.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.html)
+
 [Ir a `Ejercicio11.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio11.php)
 
 -----
@@ -105,6 +107,7 @@
 *Por seguridad y robustez, siempre debe complementarse con validación en el lado del servidor (por ejemplo, en PHP), que nunca puede ser evitada por el cliente.*
 
 [Ir a `Ejercicio12.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.html)
+
 [Ir a `Ejercicio12.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio12.php)
 
 -----
@@ -112,7 +115,9 @@
 **13- - Vuelve a versionar el ejercicio 9 de la relación anterior, pero en este caso, valida utilizando técnicas de Vanilla JavaScript.**
 
 [Ir a `Ejercicio13.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.html)
+
 [Ir a `Ejercicio13.js`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.js)
+
 [Ir a `Ejercicio13.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.php)
 
 -----
@@ -120,6 +125,7 @@
 **14- Haremos lo mismo que en el caso anterior pero con el ejercicio 12 de la relación 1, y acompañaremos la salida numérica con una salida gráfica utilizando una progress bar**
 
 [Ir a `Ejercicio14.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.html)
+
 [Ir a `Ejercicio14.php`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio14.php)
 
 -----
