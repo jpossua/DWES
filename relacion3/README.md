@@ -142,7 +142,7 @@
 
 **Haz un pequeño programa PHP sin entrada de datos, con un array numérico definido con la función range (investigar) y un rango de valores entre 1 y 100. Después:**
 
-- **Aplica array_all para comprobar si todos los números son positivos.**
+- **Aplica `array_all` para comprobar si todos los números son positivos.**
 - **Aplica `array_any` para comprobar si hay algún múltiplo de 5.**
 - **Aplica `array_filter` para extraer los que sean primos.**
 - **Aplica `array_find` para que te de la primera ocurrencia de número de dos cifras idénticas.**
