@@ -20,13 +20,13 @@
 
 -----
 
-**2-Vamos a introducir el uso de un framework de CSS, concretamente, de Bootstrap 5, para formatear el frontend. Retoma el archivo index.html de la relación 1, y aplica un estilo personalizado a tu gusto con Bootstrap 5.**
+**2- Vamos a introducir el uso de un framework de CSS, concretamente, de Bootstrap 5, para formatear el frontend. Retoma el archivo index.html de la relación 1, y aplica un estilo personalizado a tu gusto con Bootstrap 5.**
 
 [Ir a `Ejercicio02`](https://github.com/jpossua/DWES/blob/main/relacion1/index.html)
 
 -----
 
-**3-  Vamos a realizar lo propio con esta relación, y un super-index para todas las relaciones que vamos a realizar. El “super-index” tendrá una barra de navegación, una card por cada relación y un footer. Formatea con Bootstrap a tu gusto, experimentando diversas posibilidades hasta dar con tu preferida.**
+**3- Vamos a realizar lo propio con esta relación, y un super-index para todas las relaciones que vamos a realizar. El “super-index” tendrá una barra de navegación, una card por cada relación y un footer. Formatea con Bootstrap a tu gusto, experimentando diversas posibilidades hasta dar con tu preferida.**
 
 [Ir a `Ejercicio03`](https://github.com/jpossua/DWES/blob/main/index.html)
 
@@ -92,7 +92,7 @@
 
 -----
 
-**12-  Retoma el ejercicio 9 de la relación anterior y añade el nombre y el correo de la persona a la cual se le va a calcular la calificación. Cambia las notas por datos de entrada (inicial, primera, segunda y tercera).**
+**12- Retoma el ejercicio 9 de la relación anterior y añade el nombre y el correo de la persona a la cual se le va a calcular la calificación. Cambia las notas por datos de entrada (inicial, primera, segunda y tercera).**
 
 **Formatea con Bootstrap y valida los datos de entrada con html. Prueba con datos de entrada erróneos.¿crees que es suficiente con este control?**
 
@@ -112,7 +112,7 @@
 
 -----
 
-**13- - Vuelve a versionar el ejercicio 9 de la relación anterior, pero en este caso, valida utilizando técnicas de Vanilla JavaScript.**
+**13- Vuelve a versionar el ejercicio 9 de la relación anterior, pero en este caso, valida utilizando técnicas de Vanilla JavaScript.**
 
 [Ir a `Ejercicio13.html`](https://github.com/jpossua/DWES/blob/main/relacion2/Ejercicio13.html)
 
