@@ -26,7 +26,7 @@
 
 **4- Introduce todas las funciones de los ejercicios del 1 al 3 de esta relación en una librería denominada relacion3.php y prueba a incluirla e invocarla desde una nueva versión de alguno de los ejercicios anteriores, anulando con comentarios la declaración.**
 
-[Ir a `Ejercicio04.php`](https://github.com/jpossua/DWES/blob/main/relacion3/Ejercicio04.php)
+[Ir a `Ejercicio04.php`](https://github.com/jpossua/DWES/blob/main/relacion3/relacion3.php)
 
 -----
 

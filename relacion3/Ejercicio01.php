@@ -41,6 +41,9 @@
     </main>
 
     <?php
+    // Incluir la librería con las funciones
+    require_once 'relacion3.php';
+    /*
     // La función dice si el numero es primo o no
     function numeroPrimo($num)
     {
@@ -57,7 +60,7 @@
 
         return $esPrimo;
     }
-
+    */
     if (isset($_GET['numero']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $numero = intval($_GET['numero']);
         if ($numero <= 0) {

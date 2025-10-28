@@ -36,6 +36,10 @@
     </main>
 
     <?php
+    // Incluir la librería con las funciones
+    require_once 'relacion3.php';
+    /*
+    // Función que calcula el factorial de un número (recursivo).
     function calcularFactorial($num)
     {
         if ($num <= 1) {
@@ -44,7 +48,7 @@
             return $num * calcularFactorial($num - 1);
         }
     }
-
+    */
     // Determina si una variable está declarada y es diferente de null.
     if (isset($_GET['numero'])) {
         // intval convierte una cadena en un número entero
