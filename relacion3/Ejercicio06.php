@@ -43,54 +43,61 @@
                 </div>
             </article>
         </section>
+<?php
+  // Comprobamos si la variable está declarada (formulario enviado)
+  if (isset($_GET['tiradas'])) {
 
-        <?php
-        // Comprobamos si la variable está declarada (formulario enviado)
-        if (isset($_GET['tiradas'])) {
+  // Convertimos a entero
+  $tirada = intval($_GET['tiradas']);
 
-            // Convertimos a entero
-            $tirada = intval($_GET['tiradas']);
+  // Validamos que sean números positivos
+  if ($tirada <= 0) {
+      echo ("<div class='container mt-4'>
+      <div class='alert alert-danger text-center'>La tirada debe ser un numero entero positivo (mayor que 0).</div>
+      </div>");
+      } else {
+      $dado = 0;
 
-            // Validamos que sean números positivos
-            if ($tirada <= 0 || is_nan($tirada) || empty($tirada)) {
-                echo ("<div class='container mt-4'><div class='alert alert-danger'>La tirada debe ser un numero entero positivo (mayor que 0).</div></div>");
-            } else {
-                $dado = 0;
-                $contador = array(6);
-                for ($i = 0; $i < $tirada; $i++) {
-                    $dado = random_int(1, 6);
-                    switch ($dado) {
-                        case 1:
-                            $contador[0]++;
-                            break;
-                        case 2:
-                            $contador[1]++;
-                            break;
-                        case 3:
-                            $contador[2]++;
-                            break;
-                        case 4:
-                            $contador[3]++;
-                            break;
-                        case 5:
-                            $contador[4]++;
-                            break;
-                        case 6:
-                            $contador[5]++;
-                            break;
-                    }
-                }
+      /**
+      * Rellena un array con un mismo valor:
+      * array_fill($rimer índice del array devuelto, Número de elementos a insertar, Valor a utilizar para rellenar el array)
+      */
+      $contador = array_fill(0, 6, 0);
 
-                for ($i = 0; $i < 6; $i++) {
-                    echo ("<div class='alert alert-info mt-4 text-center'>");
-                    echo ("<strong>Número de veces que ha salido el" + ($i + 1) + " es: </strong>" . $contador[$i]);
-                    echo ("</div>");
-                }
-            }
-        } else {
-            echo "<div class='alert alert-warning mt-4 text-center'>No se ha recibido ningun número.</div>";
-        }
-        ?>
+      for ($i = 0; $i < $tirada; $i++) {
+          $dado=rand(1, 6);
+          switch ($dado) {
+          case 1:
+          $contador[0]++;
+          break;
+          case 2:
+          $contador[1]++;
+          break;
+          case 3:
+          $contador[2]++;
+          break;
+          case 4:
+          $contador[3]++;
+          break;
+          case 5:
+          $contador[4]++;
+          break;
+          case 6:
+          $contador[5]++;
+          break;
+          }
+          }
+
+          for ($i=0; $i < 6; $i++) {
+          echo ("<div class='alert alert-info mt-4 text-center'>");
+          echo ("<strong>Número de veces que ha salido el " . ($i + 1) . " es: </strong>" . $contador[$i]);
+          echo ("</div>");
+          }
+          }
+          } else {
+          echo "<div class='alert alert-warning mt-4 text-center'>No se ha recibido ningun número.</div>";
+          }
+          ?>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
