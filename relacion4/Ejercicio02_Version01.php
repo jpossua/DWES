@@ -40,15 +40,26 @@ if (isset($_REQUEST['enviar'])) {
             break;
 
         case 'destroy':
+            header("refresh: 5; url=" . $_SERVER['PHP_SELF']);
+            echo '<div class="text-center">';
+            echo '<div class="spinner-grow text-light" role="status" style="width: 5rem; height: 5rem;">';
+            echo '<span class="visually-hidden">Cerrando sesión...</span>';
+            echo '</div>';
+            echo '<p class="text-light mt-3 fs-5">Sesión destruida. Volviendo en <span id="counter">5</span> segundos...</p>';
+            echo '</div>';
+
             // Borrar todas las variables de sesión
             session_unset();
 
             // Destruye la sesión
             session_destroy();
 
+            $_SESSION['a'] = 0;
+            $_SESSION['b'] = 0;
+
             // Refresca la página
             // Esto redirige al navegador a la misma página
-            header("Location: " . $_SERVER['PHP_SELF']);
+            // header("Location: " . $_SERVER['PHP_SELF']);
             break;
     }
 }

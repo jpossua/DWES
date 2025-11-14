@@ -32,7 +32,6 @@
                         <div class="mb-3">
                             <label for="num1" class="form-label">Introduce el número de tiradas:</label>
                             <input type="number" class="form-control" id="tiradas" name="tiradas">
-                            <div id="tiradasHelp" class="form-text text-danger">El número de tiradas debe ser un número entero positivo.</div>
                         </div>
                 </div>
 
@@ -43,61 +42,104 @@
                 </div>
             </article>
         </section>
-<?php
-  // Comprobamos si la variable está declarada (formulario enviado)
-  if (isset($_GET['tiradas'])) {
+        <?php
+        // Comprobamos si la variable está declarada (formulario enviado)
+        if (isset($_GET['tiradas'])) {
 
-  // Convertimos a entero
-  $tirada = intval($_GET['tiradas']);
+            // Convertimos a entero
+            $tirada = intval($_GET['tiradas']);
 
-  // Validamos que sean números positivos
-  if ($tirada <= 0) {
-      echo ("<div class='container mt-4'>
+            // Validamos que sean números positivos
+            if ($tirada <= 0) {
+                echo ("<div class='container mt-4'>
       <div class='alert alert-danger text-center'>La tirada debe ser un numero entero positivo (mayor que 0).</div>
       </div>");
-      } else {
-      $dado = 0;
+            } else {
+                $dado = 0;
+                $dadoTruncado = 0;
+                /**
+                 * Rellena un array con un mismo valor:
+                 * array_fill($rimer índice del array devuelto, Número de elementos a insertar, Valor a utilizar para rellenar el array)
+                 */
+                $contador = array_fill(1, 6, 0);
+                $contadorDadoTruncado = array_fill(1, 6, 0);
 
-      /**
-      * Rellena un array con un mismo valor:
-      * array_fill($rimer índice del array devuelto, Número de elementos a insertar, Valor a utilizar para rellenar el array)
-      */
-      $contador = array_fill(0, 6, 0);
+                for ($i = 0; $i < $tirada; $i++) {
+                    $dado = random_int(1, 6);
+                    $dadoTruncado = random_int(1, 8);
+                    $contador[$dado]++;
+                    $contadorDadoTruncado[$dadoTruncado < 6 ? $dadoTruncado : 6]++;
+                }
 
-      for ($i = 0; $i < $tirada; $i++) {
-          $dado=rand(1, 6);
-          switch ($dado) {
-          case 1:
-          $contador[0]++;
-          break;
-          case 2:
-          $contador[1]++;
-          break;
-          case 3:
-          $contador[2]++;
-          break;
-          case 4:
-          $contador[3]++;
-          break;
-          case 5:
-          $contador[4]++;
-          break;
-          case 6:
-          $contador[5]++;
-          break;
-          }
-          }
-
-          for ($i=0; $i < 6; $i++) {
-          echo ("<div class='alert alert-info mt-4 text-center'>");
-          echo ("<strong>Número de veces que ha salido el " . ($i + 1) . " es: </strong>" . $contador[$i]);
-          echo ("</div>");
-          }
-          }
-          } else {
-          echo "<div class='alert alert-warning mt-4 text-center'>No se ha recibido ningun número.</div>";
-          }
-          ?>
+                // Calcular porcentajes teóricos para el dado trucado
+                $probTeoricaTrucado = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $probTeoricaTrucado[$i] = (1 / 8) * 100;
+                }
+                $probTeoricaTrucado[6] = (3 / 8) * 100;
+                if ($dado > 0 || $dadoTruncado > 0) {
+                    echo ("<div class='alert alert-info mt-4 text-center'>");
+                    echo ("<h3>Dado Equiprobable</h3>");
+                    for ($i = 1; $i <= 6; $i++) {
+                        echo ('<div class="card-body">');
+                        echo ('<table class="table table-success table-striped">');
+                        echo ('<thead>');
+                        echo ("<tr>");
+                        echo ("<th>Cara</th>");
+                        echo ("<th>Frecuencia</th>");
+                        echo ("<th>%</th>");
+                        echo ("</tr>");
+                        echo ('</thead>');
+                        echo ('<tbody>');
+                        echo ("<tr>");
+                        echo ("<td>");
+                        echo ($i);
+                        echo ("</td>");
+                        echo ("<td>");
+                        echo ($contador[$i]);
+                        echo ("</td>");
+                        echo ("<td>");
+                        echo (($contador[$i] / $tirada) * 100);
+                        echo ("</td>");
+                        echo ("</tr>");
+                        echo ('</tbody>');
+                        echo ("</table>");
+                        echo ("</div>");
+                    }
+                    echo ("<h3>Dado Truncado</h3>");
+                    for ($i = 1; $i <= 6; $i++) {
+                        echo ('<div class="card-body">');
+                        echo ('<table class="table table-success table-striped">');
+                        echo ('<thead>');
+                        echo ("<tr>");
+                        echo ("<th>Cara</th>");
+                        echo ("<th>Frecuencia</th>");
+                        echo ("<th>%</th>");
+                        echo ("</tr>");
+                        echo ('</thead>');
+                        echo ('<tbody>');
+                        echo ("<tr>");
+                        echo ("<td>");
+                        echo ($i);
+                        echo ("</td>");
+                        echo ("<td>");
+                        echo ($contador[$i]);
+                        echo ("</td>");
+                        echo ("<td>");
+                        echo (($contador[$i] / $tirada) * 100);
+                        echo ("</td>");
+                        echo ("</tr>");
+                        echo ('</tbody>');
+                        echo ("</table>");
+                        echo ("</div>");
+                    }
+                    echo ("</div>");
+                }
+            }
+        } else {
+            echo "<div class='alert alert-warning mt-4 text-center'>No se ha recibido ningun número.</div>";
+        }
+        ?>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
