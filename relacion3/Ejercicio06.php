@@ -77,18 +77,20 @@
                     $probTeoricaTrucado[$i] = (1 / 8) * 100;
                 }
                 $probTeoricaTrucado[6] = (3 / 8) * 100;
+
+                // Cuando el usuario las veces que se lanza el dado crea una tabla para los dos dados
                 if ($dado > 0 || $dadoTruncado > 0) {
                     echo ("<div class='alert alert-info mt-4 text-center'>");
-                    echo ("<h3>Dado Equiprobable</h3>");
+                    echo ("<h3 class='mb-0 text-center'>Dado Equiprobable</h3>");
+                    echo ('<div class="card-body">');
+                    echo ('<table class="table table-success table-striped">');
+                    echo ('<thead>');
+                    echo ("<tr>");
+                    echo ("<th>Cara</th>");
+                    echo ("<th>Frecuencia</th>");
+                    echo ("<th>%</th>");
+                    echo ("</tr>");
                     for ($i = 1; $i <= 6; $i++) {
-                        echo ('<div class="card-body">');
-                        echo ('<table class="table table-success table-striped">');
-                        echo ('<thead>');
-                        echo ("<tr>");
-                        echo ("<th>Cara</th>");
-                        echo ("<th>Frecuencia</th>");
-                        echo ("<th>%</th>");
-                        echo ("</tr>");
                         echo ('</thead>');
                         echo ('<tbody>');
                         echo ("<tr>");
@@ -103,19 +105,19 @@
                         echo ("</td>");
                         echo ("</tr>");
                         echo ('</tbody>');
-                        echo ("</table>");
-                        echo ("</div>");
                     }
-                    echo ("<h3>Dado Truncado</h3>");
+                    echo ("</table>");
+                    echo ("</div>");
+                    echo ("<h3 class='mb-0 text-center'>Dado Truncado</h3>");
+                    echo ('<div class="card-body">');
+                    echo ('<table class="table table-success table-striped">');
+                    echo ('<thead>');
+                    echo ("<tr>");
+                    echo ("<th>Cara</th>");
+                    echo ("<th>Frecuencia</th>");
+                    echo ("<th>%</th>");
+                    echo ("</tr>");
                     for ($i = 1; $i <= 6; $i++) {
-                        echo ('<div class="card-body">');
-                        echo ('<table class="table table-success table-striped">');
-                        echo ('<thead>');
-                        echo ("<tr>");
-                        echo ("<th>Cara</th>");
-                        echo ("<th>Frecuencia</th>");
-                        echo ("<th>%</th>");
-                        echo ("</tr>");
                         echo ('</thead>');
                         echo ('<tbody>');
                         echo ("<tr>");
@@ -123,16 +125,22 @@
                         echo ($i);
                         echo ("</td>");
                         echo ("<td>");
-                        echo ($contador[$i]);
+                        echo ($contadorDadoTruncado[$i]);
                         echo ("</td>");
                         echo ("<td>");
-                        echo (($contador[$i] / $tirada) * 100);
+                        echo (($contadorDadoTruncado[$i] / $tirada) * 100);
                         echo ("</td>");
                         echo ("</tr>");
                         echo ('</tbody>');
-                        echo ("</table>");
-                        echo ("</div>");
                     }
+                    echo ("</table>");
+                    echo ("</div>");
+                    echo '<div class="alert alert-info mt-3">';
+                    echo '<i class="fas fa-info-circle me-2"></i>';
+                    echo 'En el dado trucado, el número 6 tiene una probabilidad teórica del ';
+                    echo '<strong>' . number_format($probTeoricaTrucado[6], 2) . '%</strong>';
+                    echo ' frente al <strong>' . number_format((array_sum($probTeoricaTrucado)-$probTeoricaTrucado[6])/5, 2) . '%</strong> del dado equiprobable. Con un número elevado de tiradas, las frecuencias observadas deberían aproximarse a estos valores teóricos.';
+                    echo  '</div>';
                     echo ("</div>");
                 }
             }
