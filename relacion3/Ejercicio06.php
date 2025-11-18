@@ -90,9 +90,9 @@
                     echo ("<th>Frecuencia</th>");
                     echo ("<th>%</th>");
                     echo ("</tr>");
+                    echo ('</thead>');
+                    echo ('<tbody>');
                     for ($i = 1; $i <= 6; $i++) {
-                        echo ('</thead>');
-                        echo ('<tbody>');
                         echo ("<tr>");
                         echo ("<td>");
                         echo ($i);
@@ -101,11 +101,11 @@
                         echo ($contador[$i]);
                         echo ("</td>");
                         echo ("<td>");
-                        echo (($contador[$i] / $tirada) * 100);
+                        echo (number_format((($contador[$i] / $tirada) * 100), 2));
                         echo ("</td>");
                         echo ("</tr>");
-                        echo ('</tbody>');
                     }
+                    echo ('</tbody>');
                     echo ("</table>");
                     echo ("</div>");
                     echo ("<h3 class='mb-0 text-center'>Dado Truncado</h3>");
@@ -117,9 +117,9 @@
                     echo ("<th>Frecuencia</th>");
                     echo ("<th>%</th>");
                     echo ("</tr>");
+                    echo ('</thead>');
+                    echo ('<tbody>');
                     for ($i = 1; $i <= 6; $i++) {
-                        echo ('</thead>');
-                        echo ('<tbody>');
                         echo ("<tr>");
                         echo ("<td>");
                         echo ($i);
@@ -128,18 +128,19 @@
                         echo ($contadorDadoTruncado[$i]);
                         echo ("</td>");
                         echo ("<td>");
-                        echo (($contadorDadoTruncado[$i] / $tirada) * 100);
+                        // Usamos number_format para limitar los decimales
+                        echo (number_format((($contadorDadoTruncado[$i] / $tirada) * 100), 2));
                         echo ("</td>");
                         echo ("</tr>");
-                        echo ('</tbody>');
                     }
+                    echo ('</tbody>');
                     echo ("</table>");
                     echo ("</div>");
                     echo '<div class="alert alert-info mt-3">';
                     echo '<i class="fas fa-info-circle me-2"></i>';
                     echo 'En el dado trucado, el número 6 tiene una probabilidad teórica del ';
                     echo '<strong>' . number_format($probTeoricaTrucado[6], 2) . '%</strong>';
-                    echo ' frente al <strong>' . number_format((array_sum($probTeoricaTrucado)-$probTeoricaTrucado[6])/5, 2) . '%</strong> del dado equiprobable. Con un número elevado de tiradas, las frecuencias observadas deberían aproximarse a estos valores teóricos.';
+                    echo ' frente al <strong>' . number_format((array_sum($probTeoricaTrucado) - $probTeoricaTrucado[6]) / 5, 2) . '%</strong> del dado equiprobable. Con un número elevado de tiradas, las frecuencias observadas deberían aproximarse a estos valores teóricos.';
                     echo  '</div>';
                     echo ("</div>");
                 }
