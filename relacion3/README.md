@@ -59,7 +59,8 @@
 
 **8- Haz un programa PHP que pida un texto por formulario y las opciones de mostrarlo en mayúsculas y/o en minúsculas. Haz otra versión del formulario, para que sea una verdadera disyunción (o una u otra) y compruebe que se elija alguna de ellas validando con JS en ambos casos. Cada uno de ellos en un mismo archivo (uno para cada uno).**
 
-[Ir a `Ejercicio08.php`](https://github.com/jpossua/DWES/blob/main/relacion3/Ejercicio08.php)
+[Ir a `Ejercicio08A.php`](https://github.com/jpossua/DWES/blob/main/relacion3/Ejercicio08A.php)
+[Ir a `Ejercicio08B.php`](https://github.com/jpossua/DWES/blob/main/relacion3/Ejercicio08B.php)
 
 -----
 

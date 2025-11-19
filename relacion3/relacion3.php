@@ -56,4 +56,31 @@ function mcdRestaRecursivo($a, $b)
     }
 }
 
+// --- FUNCIONES Ejercicio 11 ---
+
+/**
+ *  Función que intercambia el valor de dos variables.
+ * IMPORTANTE: Se usan referencias (&) para modificar las variables originales.
+ */
+function swap(&$n1, &$n2) {
+    $temp = $n1;
+    $n1 = $n2;
+    $n2 = $temp;
+}
+
+/**
+ *  Función que invierte un array utilizando la función swap.
+ * Recibe el array por referencia para modificarlo directamente.
+ */
+function invertirArray(&$array) {
+    $longitud = count($array);
+    // Recorremos solo hasta la mitad del array
+    for ($i = 0; $i < $longitud / 2; $i++) {
+        // Índice opuesto al actual (del final hacia el principio)
+        $indiceOpuesto = $longitud - 1 - $i;
+        
+        // Intercambiamos el elemento actual con su opuesto
+        swap($array[$i], $array[$indiceOpuesto]);
+    }
+}
 ?>
