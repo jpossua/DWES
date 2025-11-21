@@ -28,7 +28,7 @@
 <body class="bg-primary bg-gradient">
 
     <header class="bg-primary bg-gradient text-white text-center p-4 mb-4">
-        <h1 class="fw-bold">Funciones de String en PHP</h1>
+        <h1 class="fw-bold"> Ejercicio 12: Funciones de String en PHP</h1>
         <p>Análisis, Inversión y Hashing</p>
     </header>
 

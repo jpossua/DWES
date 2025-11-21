@@ -21,7 +21,7 @@
 <body class="bg-primary bg-gradient vh-100">
 
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Buscador de Palabra Más Larga</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 9: Buscador de Palabra Más Larga</u></h1>
     </header>
 
     <main class="container mt-5">

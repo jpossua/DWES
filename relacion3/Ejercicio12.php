@@ -15,7 +15,7 @@
 <body class="bg-primary bg-gradient vh-100">
 
     <header class="bg-primary text-white text-center p-4 mb-4">
-        <h1 class="fw-bold">Algoritmo de la Burbuja (Bubble Sort)</h1>
+        <h1 class="fw-bold">Ejercicio 12: Algoritmo de la Burbuja (Bubble Sort)</h1>
         <p>Ordenación por referencia de Strings y Números</p>
     </header>
 
