@@ -51,6 +51,16 @@
 
 **4- Haremos una segunda versión del programa anterior, pero esta vez, en vez de utilizar el recurso de campos “hidden”, usaremos el establecimiento de sesión y de variables de sesión. ¿Cuál crees que es la forma más acertada de haber resuelto este problema? ¿Por qué?**
 
+***Respuesta a la pregunta:***
+
+***La forma más acertada es utilizando **sesiones** (como en este ejercicio).***
+
+- ***Seguridad:*** *Las variables de sesión se almacenan en el servidor. El usuario no puede verlas ni modificarlas fácilmente, a diferencia de los campos `hidden` que pueden ser inspeccionados y alterados con herramientas de desarrollo del navegador.*
+
+- ***Integridad:*** *Evita que el usuario manipule el número secreto para "ganar" haciendo trampas.*
+
+- ***Limpieza:*** *No ensuciamos el HTML con datos que no son relevantes para la presentación.*
+
 [Ir a `Ejercicio04.php`](https://github.com/jpossua/DWES/blob/main/relacion3/relacion3.php)
 
 -----

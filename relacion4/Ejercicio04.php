@@ -1,11 +1,15 @@
 <?php
-// Se elimina session_start() ya que no usaremos sesiones.
+session_start();
 
-// Lógica para obtener o generar el número secreto
-if (isset($_GET['numeroSecreto'])) {
-    $numeroSecreto = intval($_GET['numeroSecreto']);
-} else {
-    $numeroSecreto = rand(1, 100);
+// Lógica para reiniciar el juego
+if (isset($_POST['reiniciar'])) {
+    unset($_SESSION['numeroRandom']);
+    session_destroy();
+    session_start();
+}
+
+if (!isset($_SESSION['numeroRandom'])) {
+    $_SESSION['numeroRandom'] = rand(1, 100);
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +18,7 @@ if (isset($_GET['numeroSecreto'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 4 - Ejercicio 03</title>
+    <title>Relacion 4 - Ejercicio 04</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -28,7 +32,7 @@ if (isset($_GET['numeroSecreto'])) {
 
 <body class="bg-primary bg-gradient min-vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 03</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 04</u></h1>
     </header>
 
     <main class="container mt-5">
@@ -36,13 +40,10 @@ if (isset($_GET['numeroSecreto'])) {
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card p-4 shadow text-center bg-info-subtle">
-                    <!-- Cambiado method a GET -->
-                    <form id="form" method="get" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                    <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                         <div class="mb-3">
                             <label for="user_num">Escribe un número del 1 al 100</label><br>
                             <input type="number" id="numero" name="numero" required>
-                            <!-- Campo oculto para mantener el número secreto -->
-                            <input type="hidden" name="numeroSecreto" value="<?php echo $numeroSecreto; ?>">
                             <div id="numeroHelp" class="form-text text-danger">
                                 Introduce un número del 1 al 100.
                             </div>
@@ -54,9 +55,9 @@ if (isset($_GET['numeroSecreto'])) {
                     </form>
 
                     <?php
-                    // Procesamiento del formulario
-                    if (isset($_GET['numero'])) {
-                        $numeroUser = intval($_GET["numero"]);
+                    if (!empty($_POST) && isset($_POST['numero'])) {
+                        $numeroUser = intval($_POST["numero"]);
+                        $numeroSecreto = $_SESSION['numeroRandom'];
 
                         // Validación básica
                         if ($numeroUser <= 0 || $numeroUser >= 101) {
@@ -67,18 +68,19 @@ if (isset($_GET['numeroSecreto'])) {
                             if ($numeroSecreto == $numeroUser) {
                                 echo "<div class='alert alert-info mt-4 text-center'>";
                                 echo ("¡Enhorabuena has acertado el número!");
-                                // Generar nuevo número para jugar otra vez si se envía el formulario de nuevo (o recarga sin params)
-                                // Pero como el hidden mantiene el viejo, para reiniciar habría que limpiar la URL.
-                                echo "<br><a href='Ejercicio03.php' class='btn btn-primary mt-2'>Jugar de nuevo</a>";
+                                // Botón para reiniciar
+                                echo '<form method="post" class="mt-3">';
+                                echo '<button type="submit" name="reiniciar" class="btn btn-primary">Jugar de nuevo</button>';
+                                echo '</form>';
                                 echo "</div>";
                             } else {
                                 if ($numeroSecreto < $numeroUser) {
                                     echo "<div class='alert alert-danger mt-4 text-center'>";
-                                    echo ("El número es más pequeño."); // Pista: te has pasado
+                                    echo ("El número es más pequeño.");
                                     echo "</div>";
                                 } else {
                                     echo "<div class='alert alert-danger mt-4 text-center'>";
-                                    echo ("El número es más grande"); // Pista: te has quedado corto
+                                    echo ("El número es más grande");
                                     echo "</div>";
                                 }
                             }
@@ -88,6 +90,29 @@ if (isset($_GET['numeroSecreto'])) {
                 </div>
             </article>
         </section>
+
+        <!--<section class="row justify-content-center mt-5">
+            <article class="col-md-8">
+                <div class="card p-4 shadow bg-light">
+                    <h3>Respuesta a la pregunta:</h3>
+                    <p><strong>¿Cuál crees que es la forma más acertada de haber resuelto este problema? ¿Por
+                            qué?</strong></p>
+                    <p>
+                        La forma más acertada es utilizando <strong>sesiones</strong> (como en este ejercicio).
+                    </p>
+                    <ul>
+                        <li><strong>Seguridad:</strong> Las variables de sesión se almacenan en el servidor. El usuario
+                            no puede verlas ni modificarlas fácilmente, a diferencia de los campos <code>hidden</code>
+                            que pueden ser inspeccionados y alterados con herramientas de desarrollo del navegador.</li>
+                        <li><strong>Integridad:</strong> Evita que el usuario manipule el número secreto para "ganar"
+                            haciendo trampas.</li>
+                        <li><strong>Limpieza:</strong> No ensuciamos el HTML con datos que no son relevantes para la
+                            presentación.</li>
+                    </ul>
+                </div>
+            </article>
+        </section>-->
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
