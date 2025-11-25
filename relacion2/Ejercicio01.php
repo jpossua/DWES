@@ -27,26 +27,17 @@
         action="": La URL a la que se envían los datos. Si está vacío, se envía a la misma página.
         method="get": Los datos se envían visibles en la URL (ej: ?numero1=5&operador=suma).
     -->
-    <!-- 
-        form: Crea un formulario para enviar datos.
-        action="": La URL a la que se envían los datos. Si está vacío, se envía a la misma página.
-        method="get": Los datos se envían visibles en la URL (ej: ?numero1=5&operador=suma).
-    -->
     <form action="" method="get">
         <div>
             <!-- label: Etiqueta de texto para un campo de entrada. 'for' debe coincidir con el 'id' del input. -->
-            <!-- label: Etiqueta de texto para un campo de entrada. 'for' debe coincidir con el 'id' del input. -->
             <label for="numero1">Introduce número 1:</label>
-            <!-- input: Campo de entrada de datos. 'type="text"' permite texto (aunque para números sería mejor 'number'). -->
             <!-- input: Campo de entrada de datos. 'type="text"' permite texto (aunque para números sería mejor 'number'). -->
             <input type="text" name="numero1" id="numero1">
         </div>
         <div>
             <label for="operador">Operador</label>
             <!-- select: Crea un menú desplegable de opciones. -->
-            <!-- select: Crea un menú desplegable de opciones. -->
             <select name="operador" id="operador">
-                <!-- option: Cada una de las opciones dentro del menú. 'value' es lo que se envía al servidor. -->
                 <!-- option: Cada una de las opciones dentro del menú. 'value' es lo que se envía al servidor. -->
                 <option value="suma">+</option>
                 <option value="resta">-</option>
