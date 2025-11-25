@@ -24,6 +24,9 @@ function numeroPrimo($num)
  */
 function calcularFactorial($num)
 {
+    if ($num < 0) {
+        throw new InvalidArgumentException("El factorial no está definido para números negativos.");
+    }
     if ($num <= 1) {
         return 1;
     } else {
@@ -62,7 +65,8 @@ function mcdRestaRecursivo($a, $b)
  *  Función que intercambia el valor de dos variables.
  * IMPORTANTE: Se usan referencias (&) para modificar las variables originales.
  */
-function swap(&$n1, &$n2) {
+function swap(&$n1, &$n2)
+{
     $temp = $n1;
     $n1 = $n2;
     $n2 = $temp;
@@ -72,13 +76,14 @@ function swap(&$n1, &$n2) {
  *  Función que invierte un array utilizando la función swap.
  * Recibe el array por referencia para modificarlo directamente.
  */
-function invertirArray(&$array) {
+function invertirArray(&$array)
+{
     $longitud = count($array);
     // Recorremos solo hasta la mitad del array
     for ($i = 0; $i < $longitud / 2; $i++) {
         // Índice opuesto al actual (del final hacia el principio)
         $indiceOpuesto = $longitud - 1 - $i;
-        
+
         // Intercambiamos el elemento actual con su opuesto
         swap($array[$i], $array[$indiceOpuesto]);
     }

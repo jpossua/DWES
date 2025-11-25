@@ -73,6 +73,7 @@
                     $resultado = "";
                     while ($temp > 0) {
                         $digito = $temp % $base;
+                        // Operador ternario para convertir dígitos > 9 a letras
                         $caracter = $digito < 10 ? (string)$digito : chr(55 + $digito);
                         $resultado = $caracter . $resultado;
                         $temp = intval($temp / $base);

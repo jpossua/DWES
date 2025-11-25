@@ -50,37 +50,50 @@
         </section>
 
         <?php
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Recogemos y saneamos la entrada
+            // 1. Recogemos y saneamos la entrada
+            // trim() elimina espacios al principio y al final.
             $textoOriginal = isset($_POST['texto']) ? trim($_POST['texto']) : "";
 
             if (!empty($textoOriginal)) {
 
-                // 1. Obtener las palabras. 
-                // str_word_count con parámetro 1 devuelve un array.
-                // El tercer parámetro es importante: lista de caracteres permitidos extra (tildes, ñ) para que no corte las palabras ahí.
+                // 2. Obtener las palabras del texto
+                // str_word_count($string, $formato, $caracteres_extra)
+                // - $formato 1: Devuelve un ARRAY con todas las palabras.
+                // - $caracteres_extra: Le decimos qué caracteres consideramos parte de una palabra (tildes, ñ, números).
+                //   Si no ponemos esto, 'camión' se dividiría en 'cami' y 'n'.
                 $listaPalabras = str_word_count($textoOriginal, 1, 'áéíóúÁÉÍÓÚñÑüÜ1234567890');
 
+                // Variables para guardar el récord
                 $palabraMasLarga = "";
                 $longitudMaxima = 0;
-                $empate = []; // Por si hay varias con la misma longitud máxima
+                $empate = []; // Array para guardar si hay varias palabras igual de largas
 
-                // 2. Recorrer el array
+                // 3. Recorrer el array palabra por palabra
                 foreach ($listaPalabras as $palabra) {
-                    // Usamos mb_strlen para contar caracteres correctamente (ej: 'ñ' es 1 caracter, no 2 bytes)
+
+                    // IMPORTANTE: Usamos mb_strlen() en lugar de strlen().
+                    // strlen() cuenta BYTES. Una 'ñ' ocupa 2 bytes.
+                    // mb_strlen() cuenta CARACTERES reales (Multibyte String Length).
                     $longitudActual = mb_strlen($palabra, 'UTF-8');
 
+                    // 4. Comprobar si es un nuevo récord
                     if ($longitudActual > $longitudMaxima) {
+                        // ¡Nuevo récord!
                         $longitudMaxima = $longitudActual;
                         $palabraMasLarga = $palabra;
-                        $empate = [$palabra]; // Reiniciamos el array de empates
+                        $empate = [$palabra]; // Reiniciamos la lista de empates con la nueva ganadora
                     } elseif ($longitudActual == $longitudMaxima) {
-                        // Si encontramos otra igual de larga, la añadimos a la lista de empates
-                        $empate[] = $palabra;
+                        // ¡Empate! Es igual de larga que la actual ganadora.
+                        $empate[] = $palabra; // La añadimos a la lista
                     }
                 }
 
-                // 3. Mostrar resultados
+                // 5. Mostrar resultados
                 echo "<div class='row justify-content-center mt-4'>";
                 echo "<div class='col-md-8'>";
                 echo "<div class='alert alert-info text-center shadow-sm'>";
@@ -93,7 +106,8 @@
                     echo "<h2 class='mt-3 text-success'>" . htmlspecialchars($palabraMasLarga) . "</h2>";
                     echo "<p>Con <strong>$longitudMaxima</strong> caracteres.</p>";
 
-                    // Si hay más de una palabra con la misma longitud, las mostramos (eliminar duplicados con array_unique)
+                    // Si hay más de una palabra con la misma longitud, las mostramos
+                    // array_unique elimina duplicados (si escribiste "hola hola", solo sale una vez)
                     $unicas = array_unique($empate);
                     if (count($unicas) > 1) {
                         echo "<small class='text-muted'>Otras palabras con la misma longitud: " . implode(", ", $unicas) . "</small>";

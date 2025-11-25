@@ -45,8 +45,10 @@
     </main>
     <?php
     // Bloque PHP para procesar el formulario si se ha enviado (Opcional, pero esencial para la lógica)
+    // $_SERVER["REQUEST_METHOD"] nos dice si la página se pidió por GET (al entrar) o POST (al enviar formulario).
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Recoge los números y convertirlos a flotante (para step="any")
+        // floatval() convierte el texto del input a un número decimal.
         if (isset($_POST['numero01']) && isset($_POST['numero02'])) {
             $num01 = floatval($_POST['numero01']);
             $num02 = floatval($_POST['numero02']);

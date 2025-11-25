@@ -21,8 +21,9 @@
             <div class='alert alert-info text-center' role='alert'>
                 <?php
                 // Haremos que se ejecuten los calculos tras el envio
+                // !empty($_GET) verifica si hay parámetros en la URL (si se ha enviado el formulario).
                 if (!empty($_GET)) {
-                    // Descargo tres variables locales
+                    // Descargo tres variables locales desde el array superglobal $_GET.
                     $num01 = $_GET['numero01'];
                     $num02 = $_GET['numero02'];
                     $operador = $_GET['operador'];

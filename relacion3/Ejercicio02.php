@@ -21,10 +21,11 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-p-4 shadow text-center bg-info-subtle">
+                    <!-- Formulario para pedir el número -->
                     <form method="get" action="<?php echo ($_SERVER["PHP_SELF"]) ?>">
                         <div class="mb-3">
                             <label for="numero" class="form-label">Introduce un número entero mayor o igual a 0: </label>
-                            <input type="number" class="form-control" id="numero" name="numero" min="1" required>
+                            <input type="number" class="form-control" id="numero" name="numero" min="0" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-success">Calcular Factorial</button>
@@ -36,36 +37,49 @@
     </main>
 
     <?php
-    // Incluir la librería con las funciones
+    // ===================================================================================
+    // LÓGICA PHP
+    // ===================================================================================
+
+    // 1. Incluir librería de funciones
     require_once 'relacion3.php';
+
     /*
-    // Función que calcula el factorial de un número (recursivo).
-    function calcularFactorial($num)
-    {
-        if ($num <= 1) {
-            return 1;
-        } else {
-            return $num * calcularFactorial($num - 1);
-        }
-    }
+    NOTA SOBRE RECURSIVIDAD:
+    La función calcularFactorial($num) (que está en relacion3.php) es RECURSIVA.
+    ¿Qué significa eso? Que la función SE LLAMA A SÍ MISMA.
+    
+    Ejemplo para factorial de 5 (5!):
+    - 5 * factorial(4)
+      - 4 * factorial(3)
+        - 3 * factorial(2)
+          - 2 * factorial(1)
+            - 1 (Caso base: cuando llega a 1, para).
+    
+    Resultado: 5 * 4 * 3 * 2 * 1 = 120
     */
-    // Determina si una variable está declarada y es diferente de null.
+
+    // 2. Comprobar si hemos recibido el número
     if (isset($_GET['numero'])) {
-        // intval convierte una cadena en un número entero
+        // 3. Convertir a entero
         $numero = intval($_GET['numero']);
 
+        // 4. Validar que no sea negativo (el factorial de negativos no existe en reales)
         if ($numero < 0) {
             echo ("<div class='alert alert-danger mt-4'>El valor debe ser un número entero mayor o igual a 0.</div>");
         } else {
-            // Calculamos el factorial
+            // 5. Llamar a la función recursiva
             $factorial = calcularFactorial($numero);
-        }
-        echo ("<div class='alert alert-success mt-4 text-center'>");
-        echo ("<h4>Resultado:</h4>");
 
-        // Formatea un número con miles agrupados [number_format(number,decimals,decimalpoint,separator)].
-        echo ("<p><strong>{$numero}! = " . number_format($factorial, 0, ',', '.') . "</strong></p>");
-        echo ("</div>");
+            echo ("<div class='alert alert-success mt-4 text-center'>");
+            echo ("<h4>Resultado:</h4>");
+
+            // 6. Formatear el número
+            // number_format(numero, decimales, separador_decimal, separador_miles)
+            // Ej: 1.000.000 (sin decimales, coma para decimales, punto para miles)
+            echo ("<p><strong>{$numero}! = " . number_format($factorial, 0, ',', '.') . "</strong></p>");
+            echo ("</div>");
+        }
     }
     ?>
 

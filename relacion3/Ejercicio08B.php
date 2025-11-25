@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 8B - Radio Buttons</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
-    
+
     <!-- Carga de Bootstrap CSS 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -31,6 +31,12 @@
                         <h5>Conversor de Texto (Único)</h5>
                     </div>
                     <div class="card-body">
+                        <!-- 
+                            FORMULARIO CON RADIO BUTTONS
+                            ----------------------------
+                            Los radio buttons permiten seleccionar SOLO UNA opción de un grupo.
+                            Para que funcionen como grupo, todos deben tener EL MISMO 'name' (en este caso 'conversion').
+                        -->
                         <form action='<?php echo ($_SERVER["PHP_SELF"]) ?>' method="get" id="formTextoRadio">
 
                             <div class="mb-3">
@@ -42,10 +48,12 @@
                             <div class="mb-3">
                                 <label class="form-label">Elige una transformación:</label>
                                 <div class="form-check">
+                                    <!-- Opción 1: Value 'mayus' -->
                                     <input class="form-check-input" type="radio" name="conversion" value="mayus" id="radioMayus">
                                     <label class="form-check-label" for="radioMayus">Convertir a Mayúsculas</label>
                                 </div>
                                 <div class="form-check">
+                                    <!-- Opción 2: Value 'minus' -->
                                     <input class="form-check-input" type="radio" name="conversion" value="minus" id="radioMinus">
                                     <label class="form-check-label" for="radioMinus">Convertir a Minúsculas</label>
                                 </div>
@@ -62,11 +70,21 @@
         </section>
 
         <?php
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
         if (!empty($_GET)) {
+            // 1. Recogemos datos
             $texto = htmlspecialchars($_GET["texto"] ?? '');
-            // En radios, solo llega una variable con el valor seleccionado
+
+            // 2. Recogemos el Radio Button
+            // A diferencia de los checkbox, aquí solo recibimos UNA variable 'conversion'.
+            // Su valor será el 'value' del radio seleccionado ('mayus' o 'minus').
+            // Si no se seleccionó nada, será null.
             $conversion = $_GET["conversion"] ?? null;
 
+            // 3. Validar
             if (empty($texto) || !$conversion) {
                 echo "<div class='mt-4 alert alert-danger text-center'>Error: Datos incompletos.</div>";
             } else {
@@ -74,6 +92,7 @@
                 echo "<h4 class='text-center'>Resultado</h4>";
                 echo "<strong>Original: </strong> " . $texto . "<br><br>";
 
+                // 4. Procesar según la opción elegida
                 if ($conversion === "mayus") {
                     echo "<div class='alert alert-success'><strong>MAYÚSCULAS:</strong> " . strtoupper($texto) . "</div>";
                 } elseif ($conversion === "minus") {

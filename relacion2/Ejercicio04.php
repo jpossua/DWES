@@ -19,6 +19,8 @@
     /* error_reporting(E_ALL && ~E_WARNING); */ // Para desactivar los warnings
 
     // PHP es case sensitive (Que diferencia entre mayusculas y minusculas)
+    // Definimos una constante de array llamada SEMANA.
+    // Las constantes no cambian su valor durante la ejecución.
     const SEMANA = [
         "lunes",
         "martes",
@@ -30,7 +32,9 @@
     ]; // Las constantes se ponen en mayusculas (por convenio) y si declaro `const` no debe usar $ en el nombre
 
     echo (" <div class='text-center text-light p-3 m-2'");
+    // Accedemos al primer elemento del array (índice 0).
     echo "<p>El primer de la semana es: ", SEMANA[0], "</p>";
+    // count() devuelve el número de elementos en el array.
     echo "<p>Una semana tiene ", count(SEMANA), "</p>"; // Esta funcion calcula la longitud de un array
     echo ("</div>");
     echo "<br><center><h3 class='text-light fw-bold'><u>Todos los dias de la semana</u></h3></center>";
@@ -39,7 +43,12 @@
     echo (" <div class='row justify-content-md-center'>");
     echo ("<div class='col-auto'>");
     echo "<ol class='list-group list-group-numbered'>";
+    // Bucle for: se ejecuta 7 veces (desde i=0 hasta i=6).
+    // $i es el contador.
     for ($i = 0; $i < 7; $i++) {
+        // Concatenamos cadenas con el punto (.)
+        // $i + 1 muestra el número del día (1 al 7).
+        // SEMANA[$i] obtiene el nombre del día correspondiente.
         echo "<li class='list-group-item'>El " . $i + 1 . "º dia de la semana es " . SEMANA[$i] . "</li>";
     }
     echo "</ol>";

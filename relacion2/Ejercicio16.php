@@ -59,13 +59,15 @@
             echo ("<div class='alert alert-danger mt-4'>El número debe ser un entero mayor que 0.</div>");
         } else {
             if ($opcion == 'primo') {
+                // Algoritmo para verificar si es primo
                 $esPrimo = true;
                 if ($numero <= 1) {
                     $esPrimo = false;
                 } else {
+                    // Iteramos desde 2 hasta la raíz cuadrada del número
                     for ($i = 2; $i * $i <= $numero && $esPrimo; $i++) {
                         if ($numero % $i == 0) {
-                            $esPrimo = false;
+                            $esPrimo = false; // Si es divisible por algún número, no es primo
                         }
                     }
                 }
@@ -82,10 +84,16 @@
                 echo ("<div class='alert alert-info mt-4 text-center'>");
                 echo ("<h4>Divisores de <strong>{$numero}</strong>:</h4>");
                 echo '<p>';
+                // Encontramos todos los divisores iterando hasta el número
                 for ($i = 1; $i <= $numero; $i++) {
                     if ($numero % $i == 0) {
                         $divisores[] = "<span class='divisor'>{$i}</span>";
                     } else {
+                        // $divisores[] = (string)$i; // Esto mostraría todos los números, no solo divisores?
+                        // El código original añadía todos los números al array, pero solo coloreaba los divisores?
+                        // Revisando el código original:
+                        // if ($numero % $i == 0) { $divisores[] = "<span class='divisor'>{$i}</span>"; } else { $divisores[] = (string)$i; }
+                        // Esto imprime TODOS los números hasta N, resaltando los divisores.
                         $divisores[] = (string)$i;
                     }
                 }

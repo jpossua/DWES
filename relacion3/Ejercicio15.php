@@ -42,39 +42,60 @@
 
             <div class="col-md-8">
                 <?php
+                // ===================================================================================
+                // LÓGICA PHP MODERNA
+                // ===================================================================================
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $r = floatval($_POST['radio']);
 
                     if ($r > 0) {
 
                         // --------------------------------------------------
-                        // 1. REDEFINICIÓN CON ARROW FUNCTIONS (fn)
+                        // 1. ARROW FUNCTIONS (Funciones Flecha) - PHP 7.4+
                         // --------------------------------------------------
-                        // Sintaxis: fn(argumentos) => expresión_de_retorno;
+                        /*
+                           Son funciones anónimas más cortas.
+                           - Se escriben con 'fn'.
+                           - Tienen acceso automático a las variables de fuera (no hace falta 'use').
+                           - Solo pueden tener UNA expresión (que es lo que devuelven).
+                           
+                           Sintaxis: fn(argumentos) => resultado;
+                        */
 
+                        // Circunferencia: 2 * pi * r
                         $circunferencia = fn($n) => 2 * M_PI * $n;
 
+                        // Área: pi * r^2
                         $circulo = fn($n) => M_PI * pow($n, 2);
 
+                        // Volumen: (4/3) * pi * r^3
                         $esfera = fn($n) => (4 / 3) * M_PI * pow($n, 3);
 
-                        // Calculamos los valores
+                        // Calculamos los valores llamando a las funciones flecha
                         $valCircunferencia = $circunferencia($r);
                         $valArea = $circulo($r);
                         $valVolumen = $esfera($r);
 
 
                         // --------------------------------------------------
-                        // 2. USO DE MATCH (Ejemplo práctico)
+                        // 2. EXPRESIÓN MATCH - PHP 8.0+
                         // --------------------------------------------------
-                        // Vamos a clasificar el tamaño del círculo usando match.
-                        // Match devuelve un valor, así que lo asignamos a una variable.
+                        /*
+                           Es como un 'switch' pero mejorado:
+                           - Devuelve un valor (se puede asignar a una variable).
+                           - No necesita 'break'.
+                           - Hace comparación estricta (===).
+                           
+                           Aquí usamos 'match (true)' para evaluar condiciones lógicas.
+                           La primera que sea verdadera, gana.
+                        */
 
                         $clasificacion = match (true) {
                             $valArea < 50   => 'Pequeño',
                             $valArea < 150  => 'Mediano',
                             $valArea < 500  => 'Grande',
-                            default         => 'Gigante',
+                            default         => 'Gigante', // 'default' es como el 'else'
                         };
 
                         // MOSTRAR RESULTADOS

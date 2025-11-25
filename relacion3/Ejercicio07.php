@@ -13,19 +13,28 @@
 
 <body class="bg-primary bg-gradient min-vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 07</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 07 - Fechas y Horas</u></h1>
     </header>
 
     <?php
-    // Función personalizada para obtener el nombre del día de la semana en español.
+    // ===================================================================================
+    // FUNCIONES PERSONALIZADAS
+    // ===================================================================================
+
+    /**
+     * obtenerDiaSemanaEsp
+     * Devuelve el nombre del día de la semana en español.
+     * @param string $dateString Una fecha en formato texto (ej: "2023-10-25")
+     */
     function obtenerDiaSemanaEsp(string $dateString)
     {
-        // Creamos un objeto DateTime a partir de la cadena de fecha
+        // 1. Creamos un objeto DateTime (la forma moderna de manejar fechas en PHP)
         $date = new DateTime($dateString);
 
-        // Obtenemos el formato de día
+        // 2. Obtenemos el número del día de la semana (0=Domingo, 1=Lunes...)
         $diaNumero = $date->format('w');
 
+        // 3. Usamos un array para traducir ese número a texto
         $dias = [
             '0' => 'Domingo',
             '1' => 'Lunes',
@@ -36,15 +45,18 @@
             '6' => 'Sábado',
         ];
 
+        // Devolvemos el día o 'Desconocido' si algo fallara (operador ??)
         return $dias[$diaNumero] ?? 'Día Desconocido';
     }
 
-    // Función personalizada para obtener el nombre del mes en español.
+    /**
+     * obtenerMesEsp
+     * Devuelve el nombre del mes en español.
+     */
     function obtenerMesEsp(string $dateString)
     {
-        // Crear un objeto DateTime
         $date = new DateTime($dateString);
-        // Obtener el formato de mes (1 para Enero, 12 para Diciembre)
+        // 'n' devuelve el mes sin ceros iniciales (1 a 12)
         $mesNumero = $date->format('n');
 
         $meses = [
@@ -65,19 +77,29 @@
         return $meses[$mesNumero] ?? 'Mes desconocido';
     }
 
+    // ===================================================================================
+    // DEMOSTRACIÓN DE FUNCIONES NATIVAS
+    // ===================================================================================
+
     echo ("<div class='alert alert-info mt-4 text-center'>");
     echo ("<h3 class='mb-0 text-center'>Funciones Básicas de Fecha y Hora</h3>");
     echo ("<h3 class='mb-0 text-center'>----------------------------------------</h3><br>");
     echo ('<div class="card-body">');
+
     // 1. Obtenemos la fecha y la hora actual
+    // new DateTime() sin parámetros coge el momento actual ("ahora").
     $ahora = new DateTime();
     echo ("<b>1. Fecha y Hora Actual (Objeto DateTime): </b>" . $ahora->format('Y-m-d H:i:s') . "<br>");
 
     // 2. Obtener la marca de tiempo (Timestamp) actual
+    // El timestamp es el número de segundos que han pasado desde el 1 de Enero de 1970 (Época Unix).
+    // Es muy útil para guardar fechas en bases de datos o hacer cálculos simples.
     $timestampActual = time();
     echo ("<b>2. Marca de Tiempo (Timestamp): </b>" . $timestampActual . " segundos desde el 1 de enero de 1970.<br>");
 
     // 3. Formatear una marca de tiempo con la función date()
+    // date() es la función antigua/clásica, pero sigue siendo muy útil.
+    // 'l' = día semana texto completo, 'd' = día mes, 'm' = mes número, 'Y' = año 4 dígitos...
     $fechaFormateada = date('l, d/m/Y H:i:s', $timestampActual);
     echo ("<b>3. Timestamp formateado con date():</b> " . $fechaFormateada . "<br>");
 
@@ -85,6 +107,10 @@
     $fechaEspecifica = new DateTime('1990-04-12 15:30:00');
     echo "<b>4. Fecha específica (12 de Abril de 1990):</b> " . $fechaEspecifica->format('d-m-Y') . "<br>";
     echo ("</div></div>");
+
+    // ===================================================================================
+    // ARITMÉTICA DE FECHAS (Sumar y Restar tiempo)
+    // ===================================================================================
 
     echo ("<div class='alert alert-info mt-4 text-center'>");
     echo ("<h3 class='mb-0 text-center'>Arítmetica de Fecha y Hora (DateInterval)</h3>");
@@ -94,20 +120,27 @@
     echo "<b>Fecha inicial:</b> " . $fechaInicial->format('Y-m-d') . "<br>";
 
     // 5. Sumar tiempo
-    $intervaloSuma = new DateInterval('P3Y2M15D'); // 3 años, 2 meses, 15 días
-    $fechaFutura = clone $fechaInicial; // Clona el objeto para no modificar el original
-    $fechaFutura->add($intervaloSuma);
+    // DateInterval define un periodo. 'P' de Periodo, '3Y' = 3 Años, '2M' = 2 Meses, '15D' = 15 Días.
+    $intervaloSuma = new DateInterval('P3Y2M15D');
+
+    // IMPORTANTE: Los objetos se pasan por referencia. Si modificamos $fechaInicial, cambiaría para siempre.
+    // Por eso usamos 'clone' para crear una copia independiente antes de modificarla.
+    $fechaFutura = clone $fechaInicial;
+    $fechaFutura->add($intervaloSuma); // Método add() suma el intervalo
     echo "<b>5. Sumar 3 años, 2 meses y 15 días:</b> " . $fechaFutura->format('Y-m-d') . "<br>";
 
     // 6. Restar tiempo
-    $intervaloResta = new DateInterval('PT5H30M'); // 5 horas y 30 minutos
+    // 'PT' significa Periodo de Tiempo (para horas/minutos/segundos). '5H' = 5 Horas, '30M' = 30 Minutos.
+    $intervaloResta = new DateInterval('PT5H30M');
     $fechaPasada = clone $ahora;
-    $fechaPasada->sub($intervaloResta);
+    $fechaPasada->sub($intervaloResta); // Método sub() resta el intervalo
     echo "<b>6. Restar 5 horas y 30 minutos a la hora actual:</b> " . $fechaPasada->format('Y-m-d H:i:s') . "<br>";
 
     // 7. Calcular la diferencia entre dos fechas
     $fechaA = new DateTime('2024-12-31');
     $fechaB = new DateTime('2026-01-01');
+
+    // diff() devuelve un objeto DateInterval con la diferencia exacta
     $diferencia = $fechaA->diff($fechaB);
 
     echo "<b>7. Diferencia entre 31/12/2024 y 01/01/2026:</b><br>";
@@ -115,9 +148,13 @@
     echo "<b>   - Meses: </b>" . $diferencia->m . "<br>";
     echo "<b>   - Días: </b>" . $diferencia->d . "<br>";
 
-    // El formateador de diferencia %R%a te da el número total de días, incluyendo el signo (+/-)
+    // %R%a: %R pone el signo (+ o -), %a pone el total de días absoluto.
     echo "<b>   - Total de días: </b>" . $diferencia->format('%R%a días') . "<br>";
     echo ("</div></div>");
+
+    // ===================================================================================
+    // USO DE FUNCIONES PERSONALIZADAS
+    // ===================================================================================
 
     echo ("<div class='alert alert-info mt-4 text-center'>");
     echo ("<h3 class='mb-0 text-center'>Funciones Personalizadas en Español</h3>");
@@ -135,6 +172,7 @@
     echo "<b>9. Mes en español:</b> " . $mesEspanol . "<br>";
 
     // 10. Combinación: Mostrar la fecha actual completamente en español
+    // 'now' es una palabra clave mágica para DateTime que significa "ahora mismo".
     $fechaActualEspanol = obtenerDiaSemanaEsp('now') . ', ' .
         (new DateTime('now'))->format('d') . ' de ' .
         obtenerMesEsp('now') . ' de ' .

@@ -20,10 +20,15 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-body">
+                    <!-- 
+                        Formulario que envía datos a 'Ejercicio10.php' usando el método GET.
+                        Los datos serán visibles en la URL.
+                    -->
                     <form action="Ejercicio10.php" method="get">
                         <div class="mb-3">
                             <label for="numero01" class="form-label">Introduce número 1:</label>
-                            <input type="number" name="numero01" id="numero01" class="form-control" step="any" step="0.01" min="0" placeholder="Como mucho dos decimales" required>
+                            <input type="number" name="numero01" id="numero01" class="form-control" step="any"
+                                step="0.01" min="0" placeholder="Como mucho dos decimales" required>
                         </div>
                         <div class="mb-3">
                             <label for="operador" class="form-label">Operador</label>
@@ -37,7 +42,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="numero02" class="form-label">Introduce número 2:</label>
-                            <input type="number" name="numero02" id="numero02" class="form-control" step="0.01" min="0" placeholder="Como mucho dos decimales" required>
+                            <input type="number" name="numero02" id="numero02" class="form-control" step="0.01" min="0"
+                                placeholder="Como mucho dos decimales" required>
                         </div>
                         <div class="d-grid">
                             <input type="submit" class="btn btn-success" value="Enviar">

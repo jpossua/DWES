@@ -43,99 +43,104 @@
             </article>
         </section>
         <?php
-        // Comprobamos si la variable está declarada (formulario enviado)
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
+        // 1. Comprobamos si se ha enviado el formulario
         if (isset($_GET['tiradas'])) {
 
-            // Convertimos a entero
+            // 2. Convertimos a entero
             $tirada = intval($_GET['tiradas']);
 
-            // Validamos que sean números positivos
+            // 3. Validamos que sea positivo
             if ($tirada <= 0) {
                 echo ("<div class='container mt-4'>
       <div class='alert alert-danger text-center'>La tirada debe ser un numero entero positivo (mayor que 0).</div>
       </div>");
             } else {
+                // Variables para guardar el resultado de cada tirada individual
                 $dado = 0;
                 $dadoTruncado = 0;
+
                 /**
-                 * Rellena un array con un mismo valor:
-                 * array_fill($rimer índice del array devuelto, Número de elementos a insertar, Valor a utilizar para rellenar el array)
+                 * PREPARACIÓN DE ARRAYS CONTADORES
+                 * --------------------------------
+                 * Queremos contar cuántas veces sale cada número (1 al 6).
+                 * array_fill(índice_inicial, cantidad, valor)
+                 * Creamos un array que empieza en el índice 1, tiene 6 huecos, y todos valen 0.
+                 * Indices: [1]=>0, [2]=>0, [3]=>0, [4]=>0, [5]=>0, [6]=>0
                  */
                 $contador = array_fill(1, 6, 0);
                 $contadorDadoTruncado = array_fill(1, 6, 0);
 
+                // 4. BUCLE DE SIMULACIÓN
+                // Repetimos el proceso tantas veces como haya pedido el usuario ($tirada)
                 for ($i = 0; $i < $tirada; $i++) {
+
+                    // --- DADO NORMAL (Equiprobable) ---
+                    // random_int(1, 6) genera un número aleatorio real entre 1 y 6.
                     $dado = random_int(1, 6);
+
+                    // --- DADO TRUCADO (Trampa) ---
+                    // Generamos un número entre 1 y 8.
+                    // Si sale 1, 2, 3, 4, 5 -> Esos números.
+                    // Si sale 6, 7, 8 -> Cuenta como un 6.
+                    // Esto hace que el 6 salga 3 veces más a menudo (3/8 de probabilidad) que los demás (1/8).
                     $dadoTruncado = random_int(1, 8);
+
+                    // 5. Actualizamos contadores
+                    // Sumamos 1 a la posición correspondiente del array
                     $contador[$dado]++;
-                    $contadorDadoTruncado[$dadoTruncado < 6 ? $dadoTruncado : 6]++;
+
+                    // Para el trucado: Si salió 6, 7 u 8, sumamos al contador del 6.
+                    $indiceTrucado = ($dadoTruncado < 6) ? $dadoTruncado : 6;
+                    $contadorDadoTruncado[$indiceTrucado]++;
                 }
 
-                // Calcular porcentajes teóricos para el dado trucado
+                // 6. Calcular porcentajes teóricos (solo para mostrar info)
                 $probTeoricaTrucado = [];
                 for ($i = 1; $i <= 5; $i++) {
-                    $probTeoricaTrucado[$i] = (1 / 8) * 100;
+                    $probTeoricaTrucado[$i] = (1 / 8) * 100; // 12.5%
                 }
-                $probTeoricaTrucado[6] = (3 / 8) * 100;
+                $probTeoricaTrucado[6] = (3 / 8) * 100; // 37.5%
 
-                // Cuando el usuario las veces que se lanza el dado crea una tabla para los dos dados
+                // 7. MOSTRAR RESULTADOS
                 if ($dado > 0 || $dadoTruncado > 0) {
                     echo ("<div class='alert alert-info mt-4 text-center'>");
+
+                    // --- TABLA 1: DADO NORMAL ---
                     echo ("<h3 class='mb-0 text-center'>Dado Equiprobable</h3>");
                     echo ('<div class="card-body">');
                     echo ('<table class="table table-success table-striped">');
-                    echo ('<thead>');
-                    echo ("<tr>");
-                    echo ("<th>Cara</th>");
-                    echo ("<th>Frecuencia</th>");
-                    echo ("<th>%</th>");
-                    echo ("</tr>");
-                    echo ('</thead>');
+                    echo ('<thead><tr><th>Cara</th><th>Frecuencia</th><th>%</th></tr></thead>');
                     echo ('<tbody>');
                     for ($i = 1; $i <= 6; $i++) {
                         echo ("<tr>");
-                        echo ("<td>");
-                        echo ($i);
-                        echo ("</td>");
-                        echo ("<td>");
-                        echo ($contador[$i]);
-                        echo ("</td>");
-                        echo ("<td>");
-                        echo (number_format((($contador[$i] / $tirada) * 100), 2));
-                        echo ("</td>");
+                        echo ("<td>$i</td>");
+                        echo ("<td>{$contador[$i]}</td>"); // Cuántas veces salió
+                        // Calculamos porcentaje: (veces / total) * 100
+                        echo ("<td>" . number_format((($contador[$i] / $tirada) * 100), 2) . "</td>");
                         echo ("</tr>");
                     }
-                    echo ('</tbody>');
-                    echo ("</table>");
-                    echo ("</div>");
-                    echo ("<h3 class='mb-0 text-center'>Dado Truncado</h3>");
+                    echo ('</tbody></table></div>');
+
+                    // --- TABLA 2: DADO TRUCADO ---
+                    echo ("<h3 class='mb-0 text-center'>Dado Trucado</h3>");
                     echo ('<div class="card-body">');
                     echo ('<table class="table table-success table-striped">');
-                    echo ('<thead>');
-                    echo ("<tr>");
-                    echo ("<th>Cara</th>");
-                    echo ("<th>Frecuencia</th>");
-                    echo ("<th>%</th>");
-                    echo ("</tr>");
-                    echo ('</thead>');
+                    echo ('<thead><tr><th>Cara</th><th>Frecuencia</th><th>%</th></tr></thead>');
                     echo ('<tbody>');
                     for ($i = 1; $i <= 6; $i++) {
                         echo ("<tr>");
-                        echo ("<td>");
-                        echo ($i);
-                        echo ("</td>");
-                        echo ("<td>");
-                        echo ($contadorDadoTruncado[$i]);
-                        echo ("</td>");
-                        echo ("<td>");
-                        // Usamos number_format para limitar los decimales
-                        echo (number_format((($contadorDadoTruncado[$i] / $tirada) * 100), 2));
-                        echo ("</td>");
+                        echo ("<td>$i</td>");
+                        echo ("<td>{$contadorDadoTruncado[$i]}</td>");
+                        echo ("<td>" . number_format((($contadorDadoTruncado[$i] / $tirada) * 100), 2) . "</td>");
                         echo ("</tr>");
                     }
-                    echo ('</tbody>');
-                    echo ("</table>");
-                    echo ("</div>");
+                    echo ('</tbody></table></div>');
+
+                    // Explicación teórica
                     echo '<div class="alert alert-info mt-3">';
                     echo '<i class="fas fa-info-circle me-2"></i>';
                     echo 'En el dado trucado, el número 6 tiene una probabilidad teórica del ';

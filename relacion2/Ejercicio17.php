@@ -70,7 +70,8 @@
     if (isset($_GET['dividendo']) && isset($_GET['divisor']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $dividendo = intval($_GET['dividendo']);
         $divisor = intval($_GET['divisor']);
-        $calcular = $_GET['calcular'] ?? []; // Sin '[]', y con operador de fusión nula
+        // Operador de fusión nula (??): si $_GET['calcular'] no existe, asigna un array vacío.
+        $calcular = $_GET['calcular'] ?? [];
 
         if ($divisor == 0) {
             echo ("<div class='alert alert-danger mt-4 text-center'>El divisor no puede ser cero.</div>");
@@ -86,11 +87,11 @@
              busca la cadena de búsqueda y el tipo específico en la matriz.)
              */
             if (in_array('cociente', $calcular)) {
-                $cociente = intdiv($dividendo, $divisor); // división entera
+                $cociente = intdiv($dividendo, $divisor); // intdiv() realiza la división entera
                 echo "<p><strong>Cociente:</strong> $cociente</p>";
             }
             if (in_array('resto', $calcular)) {
-                $resto = $dividendo % $divisor;
+                $resto = $dividendo % $divisor; // % obtiene el resto de la división
                 echo "<p><strong>Resto:</strong> $resto</p>";
             }
             echo "</div>";

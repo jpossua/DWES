@@ -18,6 +18,7 @@
     </div>
     <?php
     // Creamos un array asociativo constante para las temperaturas
+    // Un array asociativo usa claves (como 'Lunes') en lugar de índices numéricos.
     // El valor puede ser no conocido hasta la ejecución
     const TEMPERATURAS = [
         'Lunes' => 25.5,
@@ -35,9 +36,12 @@
     echo ("<div class='container text-center border border-primary-subtle bg-info-subtle md-3 p-3'>");
     echo ("<div class='container bg-white md-3 p-3'>");
 
+    // 1. Muestra la temperatura del primer día de la semana accediendo por su clave 'Lunes'.
     echo ("La temperatura del Lunes es: ") . TEMPERATURAS['Lunes'] . "ºC<br><br>";
 
     // 2. Muestra la temperatura de todos los días secuencialmente.
+    // foreach recorre cada elemento del array.
+    // $dia toma la clave (ej: 'Lunes') y $temp toma el valor (ej: 25.5).
     foreach (TEMPERATURAS as $dia => $temp) {
         echo ("La temperatura del $dia es de $temp ºC<br>");
     };
@@ -48,6 +52,7 @@
     echo (" <div class='row justify-content-md-center'>");
     echo ("<div class='col-auto'>");
     echo ("<ol class='list-group list-group-numbered'>");
+    // Usamos foreach de nuevo para generar elementos de lista <li> dinámicamente.
     foreach (TEMPERATURAS as $dia => $temp) {
         echo ("<li class='list-group-item'>La temperatura del <b>$dia</b> es de <b>$temp ºC</b></li>");
     };
@@ -59,6 +64,7 @@
     echo ("<div class='table-responsive p-3'>");
     echo ("<table class='table table-bordered border-primary-subtle text-center'>");
     echo ("<th colspan='2'>Temperaturas</th>");
+    // Generamos filas de tabla <tr> con celdas <td> para cada día y temperatura.
     foreach (TEMPERATURAS as $dia => $temp) {
         echo ("<tr>");
         echo ("<td><b>$dia</b></td>");

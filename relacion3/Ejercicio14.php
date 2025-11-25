@@ -26,7 +26,7 @@
 <body class="bg-primary bg-gradient vh-100">
 
     <header class="bg-primary bg-gradient text-white text-center p-4 mb-4">
-        <h1 class="fw-bold">Ejercicio 15: Geometría con Funciones Anónimas</h1>
+        <h1 class="fw-bold">Ejercicio 14: Geometría con Funciones Anónimas</h1>
         <p>Longitud, Área y Volumen</p>
     </header>
 
@@ -57,6 +57,10 @@
 
             <div class="col-md-8">
                 <?php
+                // ===================================================================================
+                // LÓGICA PHP
+                // ===================================================================================
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Recogemos el radio. Usamos floatval para asegurarnos que es un número real.
@@ -67,6 +71,17 @@
                         // --------------------------------------------------
                         // DEFINICIÓN DE FUNCIONES ANÓNIMAS
                         // --------------------------------------------------
+                        /*
+                           ¿QUÉ SON LAS FUNCIONES ANÓNIMAS?
+                           Son funciones que no tienen nombre. Se asignan a una variable.
+                           
+                           Sintaxis:
+                           $variable = function($parametro) {
+                               return ...;
+                           };  <-- ¡Ojo al punto y coma final!
+                           
+                           Para usarlas, llamamos a la variable como si fuera una función: $variable(5);
+                        */
 
                         // 1. Longitud de la Circunferencia: L = 2 * pi * r
                         $circunferencia = function ($n) {
@@ -95,7 +110,8 @@
                         echo '<div class="card-header bg-success text-white fw-bold">Circunferencia</div>';
                         echo '<div class="card-body">';
                         echo '<h6 class="card-subtitle mb-2 text-muted">Longitud ($2\pi r$)</h6>';
-                        // LLAMADA A LA FUNCIÓN ANÓNIMA
+
+                        // LLAMADA A LA FUNCIÓN ANÓNIMA: $circunferencia($r)
                         echo '<h3 class="card-text text-success">' . number_format($circunferencia($r), 2) . '</h3>';
                         echo '</div></div></div>';
 
@@ -105,7 +121,8 @@
                         echo '<div class="card-header bg-warning text-dark fw-bold">Círculo</div>';
                         echo '<div class="card-body">';
                         echo '<h6 class="card-subtitle mb-2 text-muted">Área ($\pi r^2$)</h6>';
-                        // LLAMADA A LA FUNCIÓN ANÓNIMA
+
+                        // LLAMADA A LA FUNCIÓN ANÓNIMA: $circulo($r)
                         echo '<h3 class="card-text text-warning">' . number_format($circulo($r), 2) . '</h3>';
                         echo '</div></div></div>';
 
@@ -115,7 +132,8 @@
                         echo '<div class="card-header bg-danger text-white fw-bold">Esfera</div>';
                         echo '<div class="card-body">';
                         echo '<h6 class="card-subtitle mb-2 text-muted">Volumen ($\frac{4}{3}\pi r^3$)</h6>';
-                        // LLAMADA A LA FUNCIÓN ANÓNIMA
+
+                        // LLAMADA A LA FUNCIÓN ANÓNIMA: $esfera($r)
                         echo '<h3 class="card-text text-danger">' . number_format($esfera($r), 2) . '</h3>';
                         echo '</div></div></div>';
 
@@ -143,6 +161,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <!-- Script para renderizar fórmulas matemáticas bonitas (MathJax) -->
     <script>
         MathJax = {
             tex: {

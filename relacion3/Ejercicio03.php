@@ -20,6 +20,7 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card p-4 shadow text-center bg-info-subtle">
+                    <!-- Formulario para pedir dos números -->
                     <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
                         <div class="mb-3">
@@ -41,60 +42,53 @@
         </section>
 
         <?php
-        // Incluir la librería con las funciones
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
+        // 1. Incluir librería
         require_once 'relacion3.php';
+
         /*
+        EXPLICACIÓN DE LOS ALGORITMOS (Están en relacion3.php):
         
-         * FUNCIÓN 1: Algoritmo de Euclides por División (Recursivo)
-         *
-         * El caso base es cuando $b (el divisor) es 0. En ese punto, $a es el MCD.
-         * El paso recursivo es llamar a la función con $b como nuevo $a,
-         * y el resto ($a % $b) como nuevo $b.
-         *
-        function mcdDivisionRecursivo($a, $b)
-        {
-            if ($b == 0) {
-                return $a;
-            } else {
-                return mcdDivisionRecursivo($b, $a % $b);
-            }
-        }
-
+        El Máximo Común Divisor (MCD) es el número más grande que divide a dos números.
         
-         * FUNCIÓN 2: Algoritmo de Euclides por Restas Sucesivas (Recursivo)
-         *
-         * El caso base es cuando $a y $b son iguales. Ese es el MCD.
-         * El paso recursivo es restar el número menor del mayor y
-         * volver a llamar a la función con los nuevos valores.
-         *
-        function mcdRestaRecursivo($a, $b)
-        {
-            if ($a == $b) {
-                return $a;
-            } elseif ($a > $b) {
-                return mcdRestaRecursivo($a - $b, $b);
-            } else { // $b > $a
-                return mcdRestaRecursivo($a, $b - $a);
-            }
-        }
-
+        1. Algoritmo de Euclides (División):
+           - Es muy rápido.
+           - Se basa en que MCD(a, b) es igual a MCD(b, resto).
+           - Ejemplo MCD(48, 18):
+             - 48 / 18 = 2, resto 12. -> MCD(18, 12)
+             - 18 / 12 = 1, resto 6.  -> MCD(12, 6)
+             - 12 / 6 = 2, resto 0.   -> El resultado es 6.
+        
+        2. Algoritmo de Restas:
+           - Es más lento pero más fácil de entender.
+           - Si a > b, restamos b a a. Si b > a, restamos a a b.
+           - Repetimos hasta que sean iguales.
+           - Ejemplo MCD(48, 18):
+             - 48 - 18 = 30 -> (30, 18)
+             - 30 - 18 = 12 -> (12, 18)
+             - 18 - 12 = 6  -> (12, 6)
+             - 12 - 6 = 6   -> (6, 6) -> El resultado es 6.
         */
-        // Comprobamos si las DOS variables están declaradas (formulario enviado)
+
+        // 2. Comprobamos si las DOS variables están declaradas (formulario enviado)
         if (isset($_GET['num1']) && isset($_GET['num2'])) {
 
-            // Convertimos a entero
+            // 3. Convertimos a entero
             $num1 = intval($_GET['num1']);
             $num2 = intval($_GET['num2']);
 
-            // Validamos que sean números positivos
+            // 4. Validamos que sean números positivos
             if ($num1 <= 0 || $num2 <= 0) {
                 echo ("<div class='container mt-4'><div class='alert alert-danger'>Ambos números deben ser enteros positivos (mayores que 0).</div></div>");
             } else {
-                // Calculamos el MCD con ambas funciones
+                // 5. Calculamos el MCD con ambas funciones (recursivas)
                 $mcd_division = mcdDivisionRecursivo($num1, $num2);
                 $mcd_resta = mcdRestaRecursivo($num1, $num2);
 
-                // Mostramos los resultados
+                // 6. Mostramos los resultados
                 echo ("<div class='container mt-4'><div class='alert alert-success text-center'>");
                 echo ("<h4>Resultado para MCD($num1, $num2):</h4>");
                 echo ("<p><strong>MCD por División (Recursivo): " . $mcd_division . "</strong></p>");

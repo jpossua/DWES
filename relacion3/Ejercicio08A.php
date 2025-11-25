@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 8A - Checkboxes</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
-    
+
     <!-- Carga de Bootstrap CSS 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -31,6 +31,12 @@
                         <h5>Conversor de Texto (Múltiple)</h5>
                     </div>
                     <div class="card-body">
+                        <!-- 
+                            FORMULARIO CON CHECKBOXES
+                            -------------------------
+                            Los checkboxes permiten seleccionar VARIAS opciones a la vez.
+                            Cada checkbox tiene su propio 'name'.
+                        -->
                         <form action='<?php echo ($_SERVER["PHP_SELF"]) ?>' method="get" id="formTexto">
 
                             <div class="mb-3">
@@ -42,10 +48,12 @@
                             <div class="mb-3">
                                 <label class="form-label">¿Cómo quieres verlo?</label>
                                 <div class="form-check">
+                                    <!-- Checkbox 1: Mayúsculas -->
                                     <input class="form-check-input" type="checkbox" name="mayus" value="1" id="chkMayus">
                                     <label class="form-check-label" for="chkMayus">En Mayúsculas</label>
                                 </div>
                                 <div class="form-check">
+                                    <!-- Checkbox 2: Minúsculas -->
                                     <input class="form-check-input" type="checkbox" name="minus" value="1" id="chkMinus">
                                     <label class="form-check-label" for="chkMinus">En Minúsculas</label>
                                 </div>
@@ -62,12 +70,26 @@
         </section>
 
         <?php
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
+        // 1. Comprobar si hay datos
         if (!empty($_GET)) {
-            // Recogemos datos
+
+            // 2. Recoger datos
+            // htmlspecialchars evita inyección de código HTML/JS (seguridad básica)
+            // El operador ?? '' significa: si no existe $_GET["texto"], usa cadena vacía.
             $texto = htmlspecialchars($_GET["texto"] ?? '');
+
+            // 3. Verificar Checkboxes
+            // IMPORTANTE: Los checkboxes NO se envían si no están marcados.
+            // Por eso usamos isset(). Si isset devuelve true, es que estaba marcado.
             $checkMayus = isset($_GET["mayus"]);
             $checkMinus = isset($_GET["minus"]);
 
+            // 4. Validar
+            // Debe haber texto Y al menos un checkbox marcado
             if (empty($texto) || (!$checkMayus && !$checkMinus)) {
                 echo "<div class='mt-4 alert alert-danger text-center'>Error: Faltan datos.</div>";
             } else {
@@ -75,6 +97,7 @@
                 echo "<h4 class='text-center'>Resultados</h4>";
                 echo "<strong>Texto original: </strong> " . $texto . "<hr>";
 
+                // 5. Procesar según lo marcado (pueden ser los dos a la vez)
                 if ($checkMayus) {
                     echo "<p><strong>MAYÚSCULAS: </strong> " . strtoupper($texto) . "</p>";
                 }
@@ -100,6 +123,7 @@
         // Pasamos el ID, pero el color solo afecta al input si queremos, aquí limpiamos el texto
         document.getElementById('chkMinus').addEventListener("change", () => limpiarError('opcionHelp', 'chkMayus'));
         document.getElementById('chkMayus').addEventListener("change", () => limpiarError('opcionHelp', 'chkMayus'));
+
         formulario.addEventListener("submit", function(event) {
             if (!validarFormulario()) {
                 event.preventDefault();

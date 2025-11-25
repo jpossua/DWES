@@ -43,6 +43,7 @@
         // =================================================================
         // 0. POLYFILLS (Compatibilidad para PHP < 8.4)
         // =================================================================
+        // Definimos estas funciones por si el servidor es antiguo y no las tiene.
 
         if (!function_exists('array_any')) {
             function array_any(array $array, callable $callback): bool
@@ -67,16 +68,20 @@
         // =================================================================
         // 1. CREACIÓN DE ARRAYS (Función range)
         // =================================================================
+        /*
+           range(inicio, fin, paso)
+           Crea un array con una secuencia de números.
+        */
 
         // a) Números impares entre 1 y 20. 
-        // range(inicio, fin, paso). Paso 2 empezando en 1 genera impares.
+        // Empezamos en 1 y saltamos de 2 en 2: 1, 3, 5, 7...
         $impares = range(1, 20, 2);
 
         // b) Múltiplos de 3 entre 1 y 40.
-        // Paso 3 empezando en 3.
+        // Empezamos en 3 y saltamos de 3 en 3: 3, 6, 9, 12...
         $multiplosDeTres = range(3, 40, 3);
 
-        // Función auxiliar para imprimir bonito
+        // Función auxiliar para imprimir arrays de forma legible
         function printArr($arr)
         {
             return '[' . implode(', ', $arr) . ']';
@@ -112,12 +117,12 @@
         $totalMultiplos = count($multiplosDeTres);
 
         // 2. ARRAY_ANY: ¿Hay algún múltiplo de 5?
-        // Comprobamos en ambos arrays
+        // Usamos una arrow function como callback: fn($n) => $n % 5 === 0
         $hayMultiplo5_Impares = array_any($impares, fn($n) => $n % 5 === 0);
         $hayMultiplo5_Mult3   = array_any($multiplosDeTres, fn($n) => $n % 5 === 0);
 
         // 3. ARRAY_FILTER: Extraer Primos
-        // Definimos la lógica de primo en variable para reutilizar
+        // Definimos la lógica de "es primo" en una variable para reutilizarla
         $esPrimo = function ($n) {
             if ($n < 2) return false;
             for ($i = 2; $i <= sqrt($n); $i++) {
@@ -125,30 +130,33 @@
             }
             return true;
         };
-        // Aplicamos filtro a los Impares (por ejemplo)
+        // Filtramos el array de Impares
         $primosImpares = array_filter($impares, $esPrimo);
-        // Reindexamos con array_values para que las claves sean 0, 1, 2... (opcional pero recomendado)
+        // array_values reordena los índices (0, 1, 2...) porque filter deja huecos (0, 3, 5...)
         $primosImpares = array_values($primosImpares);
 
         // 4. ARRAY_FIND: Primera ocurrencia de dos cifras idénticas (Ej: 11, 22, 33)
-        // IMPORTANTE: Convertimos a string (strval) antes de acceder al índice para evitar el Warning
+        // Buscamos números > 9 donde el primer dígito sea igual al segundo.
+        // Convertimos a string (strval) para comparar caracteres.
         $callbackDobles = fn($n) => $n > 9 && strval($n)[0] === strval($n)[1];
 
         $dobleImpares = array_find($impares, $callbackDobles);
         $dobleMult3   = array_find($multiplosDeTres, $callbackDobles);
 
         // 5. ARRAY_MAP: Cuadrado de cada valor
-        // Lo aplicaremos a los Impares. Devuelve un array nuevo.
+        // Crea un NUEVO array elevando cada número al cuadrado.
         $cuadradosImpares = array_map(fn($n) => $n ** 2, $impares);
 
         // 6. ARRAY_INTERSECT: Valores que están en AMBOS arrays
-        // Compara valores y devuelve los que coinciden.
+        // Compara los dos arrays y devuelve los números que se repiten en ambos.
+        // (En este caso, serán los impares que también son múltiplos de 3: 3, 9, 15...)
         $comunes = array_intersect($impares, $multiplosDeTres);
 
         // 7. ARRAY_WALK: Sustituir valor por su doble
-        // array_walk modifica el array ORIGINAL por referencia.
-        // Hacemos una COPIA primero para no perder los datos originales si quisiéramos usarlos luego.
+        // array_walk modifica el array ORIGINAL.
+        // Hacemos una copia primero ($imparesDoblados) para no perder los datos originales.
         $imparesDoblados = $impares;
+        // Usamos &$n para pasar por referencia y poder modificar el valor.
         array_walk($imparesDoblados, fn(&$n) => $n *= 2);
 
         ?>

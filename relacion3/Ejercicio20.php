@@ -23,13 +23,23 @@
     <main class="container">
 
         <?php
+        // =================================================================
         // INICIALIZACIÓN DE VARIABLES
+        // =================================================================
         $nombre = $email = $edad = $sitioWeb = $codigo = "";
-        $errores = []; // Array para guardar mensajes de error
+        $errores = []; // Array asociativo para guardar mensajes de error por campo
         $datosValidos = false;
 
+        // =================================================================
         // FUNCIÓN DE LIMPIEZA BÁSICA (Helper)
-        // Elimina espacios, barras invertidas y convierte caracteres especiales
+        // =================================================================
+        /**
+         * test_input
+         * Limpia los datos de entrada para evitar inyecciones básicas.
+         * 1. trim(): Elimina espacios en blanco al inicio y final.
+         * 2. stripslashes(): Elimina barras invertidas (\) que pueden usarse para escapar caracteres.
+         * 3. htmlspecialchars(): Convierte caracteres especiales (<, >) en entidades HTML (&lt;, &gt;) para evitar XSS.
+         */
         function test_input($data)
         {
             $data = trim($data);
@@ -38,28 +48,35 @@
             return $data;
         }
 
+        // =================================================================
+        // PROCESAMIENTO DEL FORMULARIO
+        // =================================================================
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            // 1. VALIDAR NOMBRE (String con Regex)
-            // Limpieza básica primero
+            // --- 1. VALIDAR NOMBRE (String con Expresión Regular) ---
+            // Primero limpiamos la entrada
             $nombre = test_input($_POST["nombre"]);
-            // preg_match: Solo permitimos letras y espacios (incluyendo tildes básicas)
+
+            // preg_match: Comprueba si el string coincide con un patrón (Regex).
+            // /^[a-zA-Z...]*$/ -> Solo permite letras (mayus/minus) y vocales con tilde.
             if (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/", $nombre)) {
                 $errores['nombre'] = "Solo se permiten letras y espacios en blanco.";
             } elseif (empty($nombre)) {
                 $errores['nombre'] = "El nombre es obligatorio.";
             }
 
-            // 2. VALIDAR EMAIL (Filter)
+            // --- 2. VALIDAR EMAIL (Filter) ---
             $email = test_input($_POST["email"]);
-            // A. Sanitizar: Elimina caracteres ilegales de un email
+
+            // A. Sanitizar: Elimina caracteres ilegales de un email (ej: espacios, paréntesis).
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-            // B. Validar: Comprueba si el formato es correcto
+
+            // B. Validar: Comprueba si el formato es correcto (tiene @, dominio, etc).
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errores['email'] = "Formato de correo inválido.";
             }
 
-            // 3. VALIDAR SITIO WEB (URL)
+            // --- 3. VALIDAR SITIO WEB (URL) ---
             $sitioWeb = test_input($_POST["sitioWeb"]);
             if (!empty($sitioWeb)) {
                 // A. Sanitizar URL
@@ -70,8 +87,8 @@
                 }
             }
 
-            // 4. VALIDAR EDAD (Entero en un rango)
-            // filter_var con opciones avanzadas
+            // --- 4. VALIDAR EDAD (Entero en un rango) ---
+            // filter_var con opciones avanzadas (min_range, max_range).
             $edadInput = $_POST["edad"];
             $opcionesEdad = array(
                 "options" => array("min_range" => 18, "max_range" => 120)
@@ -79,19 +96,27 @@
 
             if (!filter_var($edadInput, FILTER_VALIDATE_INT, $opcionesEdad)) {
                 $errores['edad'] = "Debes tener entre 18 y 120 años.";
-                $edad = $edadInput; // Guardamos lo escrito para mostrarlo, aunque esté mal
+                $edad = $edadInput; // Guardamos lo escrito para mostrarlo en el input (aunque esté mal)
             } else {
                 $edad = $edadInput;
             }
 
-            // 5. VALIDAR CÓDIGO PERSONALIZADO (Regex Compleja)
+            // --- 5. VALIDAR CÓDIGO PERSONALIZADO (Regex Compleja) ---
             // Imaginemos un código que debe ser: 2 letras mayúsculas, guion, 4 números. (Ej: AB-1234)
             $codigo = test_input($_POST["codigo"]);
+
+            // Regex: ^[A-Z]{2}-\d{4}$
+            // ^ : Inicio
+            // [A-Z]{2} : 2 letras mayúsculas exactas
+            // - : un guion literal
+            // \d{4} : 4 dígitos numéricos
+            // $ : Fin
             if (!preg_match("/^[A-Z]{2}-\d{4}$/", $codigo)) {
                 $errores['codigo'] = "El código debe seguir el formato XX-0000 (2 Mayúsculas, guion, 4 números).";
             }
 
-            // COMPROBACIÓN FINAL
+            // --- COMPROBACIÓN FINAL ---
+            // Si el array de errores está vacío, todo ha ido bien.
             if (empty($errores)) {
                 $datosValidos = true;
             }
@@ -101,6 +126,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
+                <!-- MOSTRAR DATOS SI SON VÁLIDOS -->
                 <?php if ($datosValidos): ?>
                     <div class="alert alert-success shadow">
                         <h4 class="alert-heading">¡Datos Procesados Correctamente!</h4>
@@ -116,15 +142,18 @@
                     </div>
                 <?php endif; ?>
 
+                <!-- FORMULARIO -->
                 <div class="card shadow">
                     <div class="card-header bg-white">
                         <h5>Validación Segura</h5>
                     </div>
                     <div class="card-body">
+                        <!-- novalidate: Desactiva la validación HTML5 del navegador para probar la de PHP -->
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" novalidate>
 
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre completo:</label>
+                                <!-- Clase 'is-invalid' de Bootstrap si hay error en este campo -->
                                 <input type="text" class="form-control <?php echo isset($errores['nombre']) ? 'is-invalid' : ''; ?>"
                                     name="nombre" id="nombre" value="<?php echo $nombre; ?>">
                                 <div class="invalid-feedback"><?php echo $errores['nombre'] ?? ''; ?></div>

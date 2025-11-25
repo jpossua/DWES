@@ -20,10 +20,17 @@
 
     <main class="container">
         <?php
-        // 1. Incluimos la librería
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
+        // 1. Incluimos la librería externa 'relacion3.php'
+        // 'include' intenta cargar el archivo. Si falla, da un aviso (Warning) pero sigue ejecutando.
+        // 'require' daría un error fatal y pararía todo.
         include 'relacion3.php';
         ?>
 
+        <!-- SECCIÓN 1: PROBAR LA FUNCIÓN SWAP -->
         <section class="card shadow mb-4">
             <div class="card-header bg-dark text-white">
                 <h5 class="mb-0">1. Función swap($n1, $n2)</h5>
@@ -50,7 +57,16 @@
                         <div class="alert alert-success">
                             <h6>DESPUÉS (usando swap)</h6>
                             <?php
-                            // Llamamos a la función. Al tener '&' en la librería, cambia los valores reales.
+                            /* 
+                                EXPLICACIÓN DE SWAP (Intercambio):
+                                La función swap(&$a, &$b) está definida en 'relacion3.php'.
+                                El símbolo '&' en los parámetros de la función significa "PASO POR REFERENCIA".
+                                
+                                - Paso por Valor (normal): La función recibe una COPIA. Si cambia algo, no afecta a la variable original.
+                                - Paso por Referencia (&): La función recibe la DIRECCIÓN de memoria. Si cambia algo, CAMBIA LA ORIGINAL.
+                                
+                                Por eso, al llamar a swap($a, $b), los valores de $a y $b se intercambian de verdad.
+                            */
                             swap($a, $b);
                             ?>
                             <p>Variable A: <strong><?php echo $a; ?></strong></p>
@@ -61,6 +77,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 2: PROBAR LA FUNCIÓN INVERTIR ARRAY -->
         <section class="card shadow">
             <div class="card-header bg-dark text-white">
                 <h5 class="mb-0">2. Función invertirArray($array)</h5>
@@ -77,6 +94,7 @@
                     <div class="col-md-6">
                         <h5>Array Original:</h5>
                         <ul class="list-group">
+                            <!-- Recorremos el array para mostrarlo -->
                             <?php foreach ($miArray as $valor) echo "<li class='list-group-item'>$valor</li>"; ?>
                         </ul>
                     </div>
@@ -84,7 +102,13 @@
                     <div class="col-md-6">
                         <h5>Array Invertido:</h5>
                         <?php
-                        // Llamamos a la función que modifica el array por referencia
+                        /*
+                            La función invertirArray(&$arr) también recibe el array POR REFERENCIA.
+                            Lo que hace por dentro es:
+                            - Ir desde el principio (i=0) y desde el final (j=ultimo).
+                            - Intercambiar (swap) el elemento i con el j.
+                            - Avanzar i y retroceder j hasta que se crucen.
+                        */
                         invertirArray($miArray);
                         ?>
                         <ul class="list-group">

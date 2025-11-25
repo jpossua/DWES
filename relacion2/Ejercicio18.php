@@ -57,10 +57,13 @@
             if ($numero == 0) {
                 $binario = "0";
             } else {
+                // Algoritmo de conversión a binario
                 $temp = $numero;
                 $binario = "";
                 while ($temp > 0) {
+                    // Concatenamos el resto (0 o 1) al principio de la cadena
                     $binario = ($temp % 2) . $binario;
+                    // Dividimos por 2 para pasar al siguiente dígito
                     $temp = intval($temp / 2);
                 }
             }

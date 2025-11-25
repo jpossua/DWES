@@ -78,6 +78,9 @@
                     }
                     */
 
+                        // match es una estructura de control introducida en PHP 8.0.
+                        // Es similar a switch pero más concisa y devuelve un valor directamente.
+                        // Compara $operador con cada caso y ejecuta la expresión correspondiente.
                         $resultado = match ($operador) {
                             "+" => $num01 + $num02,
                             "-" => $num01 - $num02,

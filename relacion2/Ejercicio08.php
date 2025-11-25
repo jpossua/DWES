@@ -20,9 +20,14 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-body">
+                    <!-- 
+                        action="<?php echo ($_SERVER["PHP_SELF"]) ?>" envía los datos a la misma página.
+                        method="get" envía los datos en la URL.
+                    -->
                     <form action="<?php echo ($_SERVER["PHP_SELF"]) ?>" method="get">
                         <div class="mb-3">
                             <label for="numero01" class="form-label">Introduce número 1:</label>
+                            <!-- step="any" permite decimales. required obliga a rellenar el campo. -->
                             <input type="number" name="numero01" id="numero01" class="form-control" step="any" step="0.01" min="0" placeholder="Como mucho dos decimales" required>
                         </div>
                         <div class="mb-3">

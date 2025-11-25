@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 10 - Invertir Palabras</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
-    
+
     <!-- Carga de Bootstrap CSS 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -60,6 +60,10 @@
         </section>
 
         <?php
+        // ===================================================================================
+        // LÓGICA PHP
+        // ===================================================================================
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // 1. Recogemos la frase y limpiamos espacios al principio/final
@@ -67,17 +71,28 @@
 
             if (!empty($fraseOriginal)) {
 
-                /* LÓGICA DE INVERSIÓN:
-                   1. explode: Convierte el string en array separando por espacios (' ').
-                   2. array_filter: (Opcional) Elimina elementos vacíos si hubo múltiples espacios seguidos.
-                   3. array_reverse: Da la vuelta al array.
-                   4. implode: Une el array de nuevo en un string.
+                /* 
+                   PASOS PARA INVERTIR EL ORDEN DE LAS PALABRAS:
+                   ---------------------------------------------
+                   Ejemplo: "Hola Mundo Feliz"
+                   
+                   1. explode(' ', ...): Rompe el string en trozos cada vez que ve un espacio.
+                      Resultado: ["Hola", "Mundo", "Feliz"]
+                   
+                   2. array_filter(...): (Opcional) Si el usuario puso muchos espacios seguidos ("Hola   Mundo"),
+                      explode crearía elementos vacíos. array_filter los elimina.
+                   
+                   3. array_reverse(...): Da la vuelta al array.
+                      Resultado: ["Feliz", "Mundo", "Hola"]
+                   
+                   4. implode(' ', ...): Pega los trozos del array poniendo un espacio entre ellos.
+                      Resultado: "Feliz Mundo Hola"
                 */
 
                 // Separamos por espacios
                 $palabras = explode(' ', $fraseOriginal);
 
-                // Filtramos para quitar espacios vacíos (por si el usuario puso "hola    mundo")
+                // Filtramos para quitar espacios vacíos (limpieza)
                 $palabras = array_filter($palabras);
 
                 // Invertimos el array

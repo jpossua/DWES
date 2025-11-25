@@ -77,7 +77,8 @@
                         if ($digito < 10) {
                             $caracter = (string)$digito;
                         } else {
-                            $caracter = chr(55 + $digito); // 'A' para 10, 'B' para 11, etc.
+                            // chr(55 + $digito) convierte números >= 10 en letras (10->A, 11->B, etc.)
+                            $caracter = chr(55 + $digito);
                         }
                         $resultado = $caracter . $resultado;
                         $temp = intval($temp / $base);
@@ -115,13 +116,13 @@
             const VALOR = parseInt(document.getElementById("numero").value.trim());
             let validar = true;
 
-            if (isNaN(valor)) {
+            if (isNaN(VALOR)) { // Corregido: usaba 'valor' indefinido
                 alert("Debes introducir un número entero válido.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;
             }
 
-            if (valor < 0) {
+            if (VALOR < 0) { // Corregido: usaba 'valor' indefinido
                 alert("El número debe ser mayor o igual que 0.");
                 campoErrorColorear('numeroHelp', 'numero');
                 validar = false;

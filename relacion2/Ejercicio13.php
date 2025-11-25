@@ -31,6 +31,7 @@
                     $descontar = 0.25;
                     $notaFinal = NULL;
 
+                    // Validación adicional en servidor (aunque ya se hizo en cliente con JS)
                     if ($nota1 < 0 || $nota1 > 10 || $nota2 < 0 || $nota2 > 10 || $faltas < 0) {
                         echo "Error: Las notas deben estar entre 0 y 10, y las faltas no pueden ser negativas.";
                     } else {

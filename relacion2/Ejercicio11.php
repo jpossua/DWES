@@ -22,15 +22,18 @@
                 <?php
                 // Haremos que se ejecuten los calculos tras el envio
                 if (!empty($_GET)) {
-                    // Descargo tres variables locales
+                    // Descargo tres variables locales desde $_GET
                     $nota1 = $_GET["nota01"];
                     $nota2 = $_GET["nota02"];
                     $faltas = $_GET["faltas"];
                     $descontar = 0.25;
                     $notaFinal = NULL;
 
+                    // Calculamos la media simple
                     $notaFinal = (($nota1 + $nota2) / 2);
 
+                    // Operador ternario: (condición ? valor_si_verdadero : valor_si_falso)
+                    // Si faltas > 0, restamos la penalización. Si no, mantenemos la nota.
                     echo ("Tu nota final es: " . ($faltas > 0 ? $notaFinal = $notaFinal - ($descontar * $faltas) : $notaFinal) . "<br>");
 
                     if ($notaFinal >= 5) {

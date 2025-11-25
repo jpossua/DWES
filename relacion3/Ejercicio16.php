@@ -36,38 +36,46 @@
 
         <?php
         // =================================================================
-        // 0. POLYFILLS [es un trozo de código que define una función 
-        // si esta no existe nativamente en tu versión de PHP.]
-        // (Para compatibilidad con PHP < 8.4)
+        // 0. POLYFILLS (Compatibilidad)
         // =================================================================
+        /*
+           ¿QUÉ ES UN POLYFILL?
+           Es un trozo de código que "rellena" una funcionalidad que falta.
+           Las funciones array_all, array_any y array_find son muy nuevas (PHP 8.4).
+           Si tu servidor tiene una versión antigua (ej: 8.2), daría error.
+           Con esto decimos: "Si no existe la función, créala tú mismo así".
+        */
 
+        // array_all: Devuelve true si TODOS los elementos cumplen la condición.
         if (!function_exists('array_all')) {
             function array_all(array $array, callable $callback): bool
             {
                 foreach ($array as $key => $value) {
-                    if (!$callback($value, $key)) return false;
+                    if (!$callback($value, $key)) return false; // Si uno falla, todo falso.
                 }
                 return true;
             }
         }
 
+        // array_any: Devuelve true si AL MENOS UNO cumple la condición.
         if (!function_exists('array_any')) {
             function array_any(array $array, callable $callback): bool
             {
                 foreach ($array as $key => $value) {
-                    if ($callback($value, $key)) return true;
+                    if ($callback($value, $key)) return true; // Si uno cumple, ya es verdadero.
                 }
                 return false;
             }
         }
 
+        // array_find: Devuelve el PRIMER elemento que cumpla la condición.
         if (!function_exists('array_find')) {
             function array_find(array $array, callable $callback)
             {
                 foreach ($array as $key => $value) {
-                    if ($callback($value, $key)) return $value;
+                    if ($callback($value, $key)) return $value; // Devuelve el valor encontrado.
                 }
-                return null;
+                return null; // Si no encuentra nada, devuelve null.
             }
         }
 
@@ -75,10 +83,10 @@
         // 1. PREPARACIÓN DE DATOS
         // =================================================================
 
-        // Creamos un array del 1 al 100 con range()
+        // Creamos un array del 1 al 100 automáticamente con range()
         $numeros = range(1, 100);
 
-        // Función auxiliar para imprimir arrays largos de forma bonita
+        // Función auxiliar para imprimir arrays largos de forma bonita (corta el texto si es muy largo)
         function mostrarArrayCorto($arr)
         {
             $texto = implode(', ', $arr);
@@ -97,21 +105,24 @@
         // =================================================================
         // 2. EJECUCIÓN DE FUNCIONES CON CALLBACKS
         // =================================================================
+        /*
+           CALLBACK: Es una función que se pasa como argumento a otra función.
+           Aquí usamos "Arrow Functions" (fn($n) => ...) como callbacks.
+        */
 
-        // --- A. ARRAY_ALL (Todos cumplen la condición?) ---
-        // Callback: fn($n) => $n > 0
+        // --- A. ARRAY_ALL (¿Todos cumplen?) ---
+        // Preguntamos: ¿Son todos mayores que 0?
         $todosPositivos = array_all($numeros, fn($n) => $n > 0);
 
 
-        // --- B. ARRAY_ANY (Alguno cumple la condición?) ---
-        // Callback: fn($n) => $n % 5 === 0
+        // --- B. ARRAY_ANY (¿Alguno cumple?) ---
+        // Preguntamos: ¿Hay algún múltiplo de 5? (Resto de dividir por 5 es 0)
         $algunMultiplo5 = array_any($numeros, fn($n) => $n % 5 === 0);
 
 
-        // --- C. ARRAY_FILTER (Extraer Primos) ---
-        // Callback: Definimos una arrow function un poco más compleja o llamamos a una externa.
-        // Para ser una Arrow Function pura en una línea, la lógica de primo es compleja.
-        // Usaremos una variable Closure para mayor claridad.
+        // --- C. ARRAY_FILTER (Filtrar elementos) ---
+        // Queremos sacar solo los números PRIMOS.
+        // Definimos la lógica de "es primo" en una variable ($esPrimo) para que sea más legible.
         $esPrimo = function ($n) {
             if ($n <= 1) return false;
             for ($i = 2; $i <= sqrt($n); $i++) {
@@ -119,39 +130,29 @@
             }
             return true;
         };
-        // array_filter(array, callback)
+        // array_filter devuelve un NUEVO array solo con los que dan true.
         $primos = array_filter($numeros, $esPrimo);
 
 
-        // --- D. ARRAY_FIND (Primera ocurrencia de dos cifras idénticas) ---
-        // Ej: 11, 22, 33. Buscamos el primero.
-        // Callback: fn($n) => condición
-        /**
-         * El problema es el orden en que PHP ejecuta las cosas:
-         * La variable $n es un número (ej: 11).
-         * PHP intenta ejecutar $n[0] ANTES de convertirlo a string.
-         * Como $n es un número entero (int), PHP te dice: 
-         * "Oye, no puedes pedirme la posición 0 de un número matemático,
-         *  eso solo se hace con textos o arrays".
-         */
-        // $dobleCifra = array_find($numeros, fn($n) => $n > 9 && (string)$n[0] === (string)$n[1]);
-
-        // Opción A: Usando strval() que es más limpio
+        // --- D. ARRAY_FIND (Encontrar el primero) ---
+        // Buscamos el primer número de dos cifras iguales (ej: 11, 22, 33...).
+        // Usamos strval($n) para convertir el número a texto y poder comparar sus caracteres como si fuera un array.
+        // $n[0] es el primer carácter, $n[1] es el segundo.
         $dobleCifra = array_find($numeros, fn($n) => $n > 9 && strval($n)[0] === strval($n)[1]);
-        // Opción B: Paréntesis para forzar la conversión primero
-        // $dobleCifra = array_find($numeros, fn($n) => $n > 9 && ((string)$n)[0] === ((string)$n)[1]);
 
 
-        // --- E. ARRAY_MAP (Transformar: Elevar al cuadrado) ---
-        // OJO: array_map devuelve un NUEVO array.
-        // Callback: fn($n) => $n ** 2
+        // --- E. ARRAY_MAP (Transformar todos) ---
+        // Queremos elevar todos al cuadrado.
+        // array_map devuelve un NUEVO array con los resultados.
         $cuadrados = array_map(fn($n) => $n ** 2, $numeros);
 
 
-        // --- F. ARRAY_WALK (Modificar in-situ: Doblar valor) ---
-        // OJO: array_walk devuelve booleano, modifica el array ORIGINAL por referencia (&$valor).
-        // Callback: fn(&$n) => $n *= 2
-        $numerosDoblados = $numeros; // Hacemos copia para no perder el original de visualización 0
+        // --- F. ARRAY_WALK (Modificar in-situ) ---
+        // Queremos multiplicar por 2 todos los números del array original.
+        // array_walk NO devuelve un array nuevo, MODIFICA el que le pasas.
+        // Por eso usamos &$n (paso por referencia).
+
+        $numerosDoblados = $numeros; // Hacemos una copia primero para no estropear el original visualmente
         array_walk($numerosDoblados, fn(&$n) => $n *= 2);
 
 

@@ -65,7 +65,9 @@
         </div>
 
         <?php
+        // =================================================================
         // 1. DATOS DEL MENÚ
+        // =================================================================
         $menu = [
             'entrante' => ['Ensalada César', 'Hummus', 'Boquerones al natural'], // Boquerones saldrán más
             'primero'  => ['Gazpachuelo', 'Salmorejo', 'Ajo Blanco'],           // Ajo Blanco saldrá más
@@ -73,7 +75,9 @@
             'postre'   => ['Helado 3 sabores', 'Flan', 'Tarta de Queso']        // Tarta saldrá más
         ];
 
-        // 2. ARRAY DE IMÁGENES (Solo para los primeros)
+        // =================================================================
+        // 2. ARRAY DE IMÁGENES (Solo para los primeros platos)
+        // =================================================================
         // Clave = Nombre del plato exacto, Valor = Ruta relativa
         $imagenesPlatos = [
             'Gazpachuelo' => 'img/gazpachuelo.jpg',
@@ -81,7 +85,9 @@
             'Ajo Blanco'  => 'img/ajoblanco.jpg'
         ];
 
+        // =================================================================
         // 3. PROCESAMIENTO
+        // =================================================================
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $n = intval($_POST['cantidad']);
 
@@ -94,32 +100,38 @@
                     // Necesitamos saber qué platos salen para decidir qué imagen poner en la cabecera
 
                     $menuGenerado = [];
-                    $imagenCabecera = 'img/default.jpg'; // Imagen por defecto
+                    $imagenCabecera = 'img/default.jpg'; // Imagen por defecto si no hay específica
                     $platoDestacado = '';
 
                     foreach ($menu as $categoria => $platos) {
 
+                        // =========================================================
                         // LÓGICA DE PROBABILIDAD PONDERADA
-                        // Queremos que el índice 2 (la 3ª opción) salga el doble.
-                        // Creamos una "bolsa" virtual de papeletas: [0, 1, 2, 2]
-                        // El 0 tiene 25%, el 1 tiene 25%, el 2 tiene 50%.
+                        // =========================================================
+                        // Queremos que el índice 2 (la 3ª opción) salga el doble de veces que las otras.
+                        // OPCIÓN A: [0, 1, 2] -> Todos tienen 33% probabilidad.
+                        // OPCIÓN B: [0, 1, 2, 2] -> 
+                        //    - 0: 25%
+                        //    - 1: 25%
+                        //    - 2: 50% (porque aparece dos veces en la "bolsa" del sorteo)
+
                         $bolsaIndices = [0, 1, 2, 2];
 
-                        // Sacamos un índice de la bolsa
+                        // Sacamos un índice aleatorio de nuestra "bolsa trucada"
                         $indiceSorteado = $bolsaIndices[array_rand($bolsaIndices)];
 
                         $nombrePlato = $platos[$indiceSorteado];
 
-                        // Guardamos el plato generado
+                        // Guardamos el plato generado en un array temporal
                         $menuGenerado[$categoria] = [
                             'nombre' => $nombrePlato,
                             'esPonderado' => ($indiceSorteado == 2) // Para marcarlo visualmente (opcional)
                         ];
 
-                        // GESTIÓN DE IMAGEN (Solo si es 'primero')
+                        // GESTIÓN DE IMAGEN (Solo si es la categoría 'primero')
                         if ($categoria === 'primero') {
                             $platoDestacado = $nombrePlato;
-                            // Verificamos si existe imagen definida para este plato
+                            // Verificamos si existe imagen definida para este plato en nuestro array $imagenesPlatos
                             if (array_key_exists($nombrePlato, $imagenesPlatos)) {
                                 $imagenCabecera = $imagenesPlatos[$nombrePlato];
                             }
@@ -131,6 +143,7 @@
                     <div class="col-md-4">
                         <div class="card card-menu h-100">
 
+                            <!-- Imagen dinámica: Si falla la carga, muestra un placeholder -->
                             <img src="<?php echo $imagenCabecera; ?>"
                                 class="card-img-top"
                                 alt="<?php echo $platoDestacado; ?>"
@@ -145,6 +158,7 @@
                                                 <strong class="text-uppercase small text-muted"><?php echo $cat; ?>:</strong><br>
                                                 <?php echo $item['nombre']; ?>
                                             </span>
+                                            <!-- Si es el plato ponderado, mostramos una estrellita -->
                                             <?php if ($item['esPonderado']): ?>
                                                 <span class="badge badge-probability rounded-pill" title="Opción con doble probabilidad">★</span>
                                             <?php endif; ?>

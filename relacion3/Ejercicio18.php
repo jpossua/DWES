@@ -70,7 +70,11 @@
         </section>
 
         <?php
-        // Definición de la carta (Array multidimensional)
+        // =================================================================
+        // DEFINICIÓN DE DATOS (Array Multidimensional)
+        // =================================================================
+        // Tenemos un array asociativo donde cada clave (entrante, primero...)
+        // contiene otro array indexado con los platos.
         $menu = [
             'entrante' => array('Ensalada César', 'Hummus', 'Boquerones al natural'),
             'primero'  => array('Gazpachuelo', 'Salmorejo', 'Ajo Blanco'),
@@ -100,14 +104,17 @@
                                 // Recorremos las categorías del array original (entrante, primero...)
                                 foreach ($menu as $categoria => $listaPlatos) {
 
+                                    // =========================================================
                                     // LÓGICA PRINCIPAL: array_rand
-                                    // array_rand devuelve una CLAVE aleatoria (o varias), no el valor.
+                                    // =========================================================
+                                    // array_rand($array) devuelve una CLAVE aleatoria (índice), NO el valor.
+                                    // Si $listaPlatos tiene 3 elementos (índices 0, 1, 2), devolverá 0, 1 o 2.
                                     $claveAleatoria = array_rand($listaPlatos);
 
-                                    // Usamos la clave para obtener el nombre del plato
+                                    // Usamos esa clave para sacar el nombre del plato del array.
                                     $platoElegido = $listaPlatos[$claveAleatoria];
 
-                                    // Iconos dinámicos según categoría
+                                    // Iconos dinámicos según categoría (usando match de PHP 8)
                                     $icono = match ($categoria) {
                                         'entrante' => 'bi-leaf',
                                         'primero' => 'bi-cup-hot',

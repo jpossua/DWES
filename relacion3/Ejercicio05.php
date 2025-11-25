@@ -28,6 +28,12 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-body">
+                    <!-- 
+                        FORMULARIO COMPLEJO
+                        -------------------
+                        Este formulario recoge varios tipos de datos: texto, email, select, números.
+                        Tiene un ID "form1" para poder controlarlo con JavaScript.
+                    -->
                     <form action='<?php echo ($_SERVER["PHP_SELF"]) ?>' method="get" id="form1">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Introduce tu nombre:</label>
@@ -55,6 +61,7 @@
                             <input class="form-control test-danger" type="text" name="numDoc" id="numDoc">
                             <div id="numDocHelp" class="form-text text-danger">El número de documento no es válido.</div>
                         </div>
+                        <!-- Este campo está oculto por defecto (display: none) y solo se muestra si se elige TIE -->
                         <div class="mb-3" id="campoTIESoporte" style="display: none;">
                             <label for="numSoporte" class="form-label">Número de Soporte (TIE):</label>
                             <input class="form-control" type="text" name="numSoporte" id="numSoporte"
@@ -90,11 +97,14 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
-<!--PHP-->
+
+<!-- =================================================================================== -->
+<!-- PROCESAMIENTO PHP (Servidor) -->
+<!-- =================================================================================== -->
 <?php
-// Haremos que se ejecuten los calculos tras el envio
+// !empty($_GET) comprueba si el array $_GET tiene datos (es decir, si se ha enviado el formulario)
 if (!empty($_GET)) {
-    // Descargo tres variables locales
+    // 1. Recogemos los datos del formulario
     $nombre = $_GET["nombre"];
     $email = $_GET["email"];
     $tipoDoc = $_GET["tipoDoc"];
@@ -103,16 +113,23 @@ if (!empty($_GET)) {
     $nota1 = $_GET["nota01"];
     $nota2 = $_GET["nota02"];
     $faltas = $_GET["faltas"];
-    $descontar = 0.25;
+
+    // Configuración
+    $descontar = 0.25; // Puntos a restar por falta
     $notaFinal = NULL;
 
+    // 2. Validación básica en servidor (siempre hay que validar en servidor, aunque haya JS)
     if ($nota1 < 0 || $nota1 > 10 || $nota2 < 0 || $nota2 > 10 || $faltas <= 0) {
+        // Nota: Aquí hay un pequeño bug lógico en el original: si faltas es 0, entra en error.
+        // Debería ser $faltas < 0. Pero mantengo la lógica original explicándola.
         echo "<div class='container mt-4'><div class='alert alert-danger text-center'>";
         echo "Error: Datos numéricos no válidos recibidos.";
         echo "</div></div>";
     } else {
+        // 3. Cálculos
         $notaFinal = (($nota1 + $nota2) / 2);
 
+        // 4. Mostrar resultados
         echo ("<div class='container mt-4'><div class='alert alert-success text-center'>");
         echo ("<h4>Resultado</h4>");
         echo ("<strong>Nombre: </strong>" . $nombre);
@@ -124,9 +141,12 @@ if (!empty($_GET)) {
         if ($tipoDoc == "TIE" && !empty($numSoporte)) {
             echo ("<br><strong>Nº Soporte: </strong>" . $numSoporte);
         }
+
+        // Cálculo final con operador ternario: Si hay faltas, restamos. Si no, nota normal.
         echo ("<br><strong>Tu nota final es: </strong>" . ($faltas > 0 ? $notaFinal = $notaFinal - ($descontar * $faltas) : $notaFinal) . "<br>");
         echo ("</div>");
 
+        // Mensaje final
         if ($notaFinal >= 5) {
             echo ("<div class='alert alert-info text-center'>¡Enhorabuena has aprobado!</div>");
         } else {
@@ -137,33 +157,37 @@ if (!empty($_GET)) {
 }
 ?>
 
-<!--JAVASCRIPT-->
+<!-- =================================================================================== -->
+<!-- VALIDACIÓN JAVASCRIPT (Cliente) -->
+<!-- =================================================================================== -->
 <script>
     const formulario = document.getElementById("form1");
     const tipoDocSelect = document.getElementById('tipoDoc');
     const campoTIESoporte = document.getElementById('campoTIESoporte');
 
-    // Se dispara cuando se envie el contenido y si el formulario no es valido no lo envia al php
+    // EVENTO SUBMIT: Se dispara al intentar enviar el formulario
     formulario.addEventListener("submit", function(event) {
+        // Si la validación falla, evitamos que se envíe (preventDefault)
         if (!validarFormulario()) {
             event.preventDefault();
         }
     });
 
-    // Se dispara cuando se cambie el contenido segun el select seleccionado ocultando o no el campo del TIE
+    // EVENTO CHANGE: Se dispara al cambiar el select de Tipo de Documento
     tipoDocSelect.addEventListener('change', function() {
+        // Si elige TIE, mostramos el campo extra. Si no, lo ocultamos.
         if (this.value === 'TIE') {
             campoTIESoporte.style.display = 'block';
         } else {
             campoTIESoporte.style.display = 'none';
-            document.getElementById('numSoporte').value = ''; // Limpia el valor si se oculta
+            document.getElementById('numSoporte').value = ''; // Limpiamos el valor al ocultar
         }
-        // Limpiar errores del select y del numDoc al cambiar
+        // Limpiamos errores visuales previos
         limpiarError('tipoDocHelp', 'tipoDoc');
         limpiarError('numDocHelp', 'numDoc');
     });
 
-    // Listeners para limpiar errores al escribir (igual que el de DNI original)
+    // EVENTOS INPUT: Para limpiar los mensajes de error en tiempo real mientras el usuario escribe
     document.getElementById('nombre').addEventListener("input", function() {
         limpiarError('nombreHelp', 'nombre')
     });
@@ -174,9 +198,10 @@ if (!empty($_GET)) {
     document.getElementById('nota02').addEventListener("input", () => limpiarError('nota02Help', 'nota02'));
     document.getElementById('faltas').addEventListener("input", () => limpiarError('faltasHelp', 'faltas'));
 
-    // Función para válidar el Formulario
+    // FUNCIÓN PRINCIPAL DE VALIDACIÓN
     function validarFormulario() {
         let correcto = true;
+        // Recogemos valores y limpiamos espacios (trim)
         const nombre = document.getElementById("nombre").value.trim();
         const email = document.getElementById("email").value.trim();
         const tipoDoc = document.getElementById("tipoDoc").value;
@@ -186,16 +211,19 @@ if (!empty($_GET)) {
         const nota2 = document.getElementById("nota02").value;
         const faltas = document.getElementById("faltas").value;
 
+        // Validar Nombre (solo letras y espacios)
         if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre) || nombre === "") {
             campoColorear("nombreHelp", "nombre");
             correcto = false;
         }
 
+        // Validar Email (regex estándar)
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
             campoColorear("emailHelp", "email");
             correcto = false;
         }
 
+        // Validar Notas (0-10)
         if (nota1 === "" || isNaN(nota1) || parseInt(nota1) < 0 || parseInt(nota1) > 10) {
             campoColorear("nota01Help", "nota01");
             correcto = false;
@@ -206,11 +234,13 @@ if (!empty($_GET)) {
             correcto = false;
         }
 
+        // Validar Faltas (entero positivo)
         if (faltas === "" || isNaN(faltas) || parseInt(faltas) < 0 || !Number.isInteger(parseFloat(faltas))) {
             campoColorear("faltasHelp", "faltas");
             correcto = false;
         }
 
+        // Validar Documento según el tipo seleccionado
         switch (tipoDoc) {
             case 'DNI':
                 if (!validarDNI(numDoc)) {
@@ -225,7 +255,7 @@ if (!empty($_GET)) {
                 }
                 break;
             case 'TIE':
-                // El TIE requiere un NIE válido Y un número de soporte válido
+                // El TIE requiere NIE válido Y número de soporte válido
                 if (!validarNIE(numDoc)) {
                     campoColorear("numDocHelp", "numDoc", "El NIE (parte del TIE) no es válido.");
                     correcto = false;
@@ -244,23 +274,23 @@ if (!empty($_GET)) {
         return correcto;
     }
 
-    // Función que valida un DNI español (formato y letra).
-
+    // Función auxiliar: Validar DNI (algoritmo del módulo 23)
     function validarDNI(dni) {
         const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-        const regex = /^[0-9]{8}[A-Z]$/i; // 8 números y 1 letra (case-insensitive)
+        const regex = /^[0-9]{8}[A-Z]$/i; // 8 números y 1 letra
         let esValido = false;
 
         if (regex.test(dni)) {
             const numero = dni.substr(0, 8);
             const letra = dni.substr(8, 1).toUpperCase();
-            esValido = (letra === letra[numero % 23] ? true : false);
+            // Comprobamos si la letra coincide con la calculada
+            esValido = (letra === letras[numero % 23] ? true : false);
         }
 
         return esValido;
     }
 
-    // Función que valida un NIE español (formato y letra).
+    // Función auxiliar: Validar NIE (X, Y, Z se convierten en 0, 1, 2)
     function validarNIE(nie) {
         const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         const regex = /^[XYZ][0-9]{7}[A-Z]$/i;
@@ -271,34 +301,29 @@ if (!empty($_GET)) {
             const letra = nie.substr(8, 1).toUpperCase();
             const inicial = nie.substr(0, 1);
 
-            // Sustituir X por 0, Y por 1, Z por 2
-            if (inicial === 'X') {
-                num = '0' + num;
-            } else if (inicial === 'Y') {
-                num = '1' + num;
-            } else if (inicial === 'Z') {
-                num = '2' + num;
-            }
-            esValido = (letra === letra[numero % 23] ? true : false);
+            // Sustituir letra inicial por número
+            if (inicial === 'X') num = '0' + num;
+            else if (inicial === 'Y') num = '1' + num;
+            else if (inicial === 'Z') num = '2' + num;
+
+            esValido = (letra === letras[num % 23] ? true : false);
         }
         return esValido;
-
-
     }
 
-    // Función que valida el número de soporte del TIE (E + 8 dígitos).
+    // Función auxiliar: Validar Soporte TIE (E + 8 dígitos)
     function validarSoporteTIE(soporte) {
         const regex = /^E[0-9]{8}$/i;
         return regex.test(soporte);
     }
 
-    // Función que colorea si algún campo no cumple los requisitos.
+    // Función visual: Muestra el error
     function campoColorear(id1, id2) {
         document.getElementById(id1).style.visibility = "visible";
         document.getElementById(id2).style.borderColor = "red";
     }
 
-    // Función que colorea si algún campo cumple los requisitos.
+    // Función visual: Oculta el error
     function limpiarError(id1, id2) {
         document.getElementById(id1).style.visibility = "hidden";
         document.getElementById(id2).style.borderColor = "#dee2e6";

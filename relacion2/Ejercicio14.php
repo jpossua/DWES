@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relacion 2 - Ejercicio 15</title>
+    <title>Relacion 2 - Ejercicio 14</title>
     <link rel="shortcut icon" href="img/playamar.png" type="image/x-icon">
 
     <!-- Carga de Bootstrap CSS 5.3 -->
@@ -14,7 +14,7 @@
 
 <body class="bg-primary bg-gradient vh-100">
     <header class="card-header text-center">
-        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 15</u></h1>
+        <h1 class="mb-0 text-light fw-bold p-3"><u>Ejercicio 14</u></h1>
     </header>
 
     <main class="container mt-5">
@@ -31,7 +31,7 @@
                         if ($nota < 0 || $nota > 10) {
                             echo ("<div class='alert alert-danger'>La nota debe estar entre 0 y 10.</div>");
                         } else {
-                            // Determinamos calificación textual
+                            // Determinamos calificación textual usando if/elseif/else
                             if ($nota >= 9) {
                                 $calificacion = "Sobresaliente";
                                 $color = "success";
@@ -50,6 +50,7 @@
                             }
 
                             // Calculamos el porcentaje para la barra (nota * 10)
+                            // round() redondea el número. min() y max() aseguran que esté entre 0 y 100.
                             $porcentaje = min(100, max(0, round($nota * 10, 1)));
 
                             echo ("<h2 class='mb-4'>Tu nota: <strong>" . number_format($nota, 1) . "</strong></h2>");

@@ -21,6 +21,7 @@
         <section class="row justify-content-center">
             <article class="col-md-6">
                 <div class="card-p-4 shadow text-center bg-info-subtle">
+                    <!-- Formulario que se envía a sí mismo (PHP_SELF) -->
                     <form method="get" action="<?php echo ($_SERVER["PHP_SELF"]) ?>" onsubmit="return validarFormulario()">
                         <div class="mb-3">
                             <label for="numero" class="form-label">Introduce un número entero mayor o igual a 0: </label>
@@ -45,10 +46,11 @@
             echo ("<div class='alert alert-danger mt-4'>El valor debe ser un número entero mayor o igual a 0.</div>");
         } else {
             // Calculamos el factorial
+            // El factorial de un número n es el producto de todos los enteros positivos desde 1 hasta n.
             $factorial = 1;
             if ($numero > 0) {
                 for ($i = 1; $i <= $numero; $i++) {
-                    $factorial *= $i;
+                    $factorial *= $i; // Multiplicamos acumulativamente
                 }
             }
         }
